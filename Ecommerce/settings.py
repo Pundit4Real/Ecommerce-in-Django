@@ -149,3 +149,6 @@ JAZZMIN_SETTINGS ={
     'site_logo': "assets/imgs/theme/flag-fr.png",
     'copyright': "Pundit-shop.com"
 }
+
+
+AUTH_USER_MODEL = 'userauths.User'

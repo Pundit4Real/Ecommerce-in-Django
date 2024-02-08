@@ -1,6 +1,16 @@
-from django.contrib.auth.models import User
+from enum import unique
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-class customer(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    # Other fields and methods for your model...
+class User(AbstractUser):
+    email = models.EmailField(unique=True)
+    username= models.CharField(max_length=100)
+    bio = models.CharField(max_length=100)
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ['username']
+
+
+    def ___str__(self):
+        return self.username
+
