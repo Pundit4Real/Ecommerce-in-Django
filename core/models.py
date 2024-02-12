@@ -65,7 +65,7 @@ class Vendor(models.Model):
     warranty_period = models.CharField(max_length=100,default="100")
 
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL,null=True)
 
 
     class meta:
@@ -81,7 +81,7 @@ class Product(models.Model):
     pid = ShortUUIDField(unique=True, length=10, max_length=20, prefix="prd", alphabet= "abcdefgh12345")
 
     user = models.ForeignKey(User, on_delete=models.SET_NULL,null=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL,null=True)
 
     title = models.CharField(max_length=100, default="Fresh items")
     image = models.ImageField(upload_to=user_directory_path,default="product.jpg")
@@ -108,7 +108,7 @@ class Product(models.Model):
         verbose_name_plural = "Products"
 
     def products_image(self):
-        return mark_safe('<img src="%s" width="50" height="50" />' % (self.image))
+        return mark_safe('<img src="%s" width="50" height="50" />' % (self.image.url))
     
     def __str__(self):
         return self.title
@@ -122,7 +122,7 @@ def get_percentage(self):
 class ProductImages(models.Model):
     images = models.ImageField(upload_to="product-images",default="product.jpg")
     product = models.ForeignKey(Product, on_delete=models.SET_NULL,null=True)
-    date = models.DateField(auto_now=True)
+    date = models.DateField(auto_now_add=True)
 
 
     class meta:
@@ -138,7 +138,7 @@ class CartOrder(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=9999999999,decimal_places=2,default="")
     paid_status = models.BooleanField(default=False)
-    order_date = models.DateField(auto_now=True)
+    order_date = models.DateField(auto_now_add=True)
     product_status = models.CharField(choices=STATUS_CHOICES,max_length=10, default="processing")
 
 
