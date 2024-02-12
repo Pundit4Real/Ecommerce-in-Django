@@ -82,6 +82,7 @@ class Product(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.SET_NULL,null=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL,null=True)
+    vendor = models.ForeignKey(Vendor, on_delete=models.SET_NULL,null=True)
 
     title = models.CharField(max_length=100, default="Fresh items")
     image = models.ImageField(upload_to=user_directory_path,default="product.jpg")
@@ -114,9 +115,9 @@ class Product(models.Model):
         return self.title
     
 
-def get_percentage(self):
-    new_price = (self.price / self.old_price) * 100
-    return new_price
+    def get_percentage(self):
+        new_price = (self.price / self.old_price) * 100
+        return new_price
 
 
 class ProductImages(models.Model):
