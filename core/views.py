@@ -5,9 +5,10 @@ from core.models import Product,Vendor, Category, CartOrder,CartOrderItems, Prod
 
 
 def index(request):
-    product = Product.objects.all().order_by("-id")
+    # product = Product.objects.all().order_by("-id")
+    products = Product.objects.filter(featured=True)
 
     context = {
-        "products":product
+        "products":products
     }
     return render(request,"core/index.html", context)
