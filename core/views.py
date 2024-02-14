@@ -49,3 +49,10 @@ def vendor_list_view(requuest):
         "vendors": vendors
     }
     return render(requuest, "core/vendor_list.html", context)
+
+def vendor_detail_view(requuest, vid):
+    vendor = Vendor.objects.get(vid=vid)
+    context = {
+        "vendor": vendor
+    }
+    return render(requuest, "core/vendor-detail.html", context)
