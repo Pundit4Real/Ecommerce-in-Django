@@ -320,45 +320,22 @@
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-categori-wrap d-none d-lg-block">
                             <a class="categories-button-active" href="#">
-                                <span class="fi-rs-apps"></span> <span class="et">Browse</span> All Categories
+                                <span class="fi-rs-apps"></span> <span class="et">Browse</span>All Categories
                                 <i class="fi-rs-angle-down"></i>
                             </a>
                             <div class="categories-dropdown-wrap categories-dropdown-active-large font-heading">
                                 <div class="d-flex categori-dropdown-inner">
                                     <ul>
+                                        {%for c in  categories%}
+
                                         <li>
-                                            <a href='shop-grid-right.html'> <img src="{% static 'assets/imgs/theme/icons/category-1.svg' %}" alt="">Milks and Dairies</a>
+                                            <a href="{% url 'core:category-product-list' c.cid %}"> <img src="
+                                            {{c.image.url}}" alt="">
+                                            {{c.title}}</a>
                                         </li>
-                                        <li>
-                                            <a href='shop-grid-right.html'> <img src="{% static 'assets/imgs/theme/icons/category-2.svg' %}" alt="">Clothing & beauty</a>
-                                        </li>
-                                        <li>
-                                            <a href='shop-grid-right.html'> <img src="{% static 'assets/imgs/theme/icons/category-3.svg' %}" alt="">Pet Foods & Toy</a>
-                                        </li>
-                                        <li>
-                                            <a href='shop-grid-right.html'> <img src="{% static 'assets/imgs/theme/icons/category-4.svg' %}" alt="">Baking material</a>
-                                        </li>
-                                        <li>
-                                            <a href='shop-grid-right.html'> <img src="{% static 'assets/imgs/theme/icons/category-5.svg' %}" alt="">Fresh Fruit</a>
-                                        </li>
+                                       {% endfor %}
                                     </ul>
-                                    <ul class="end">
-                                        <li>
-                                            <a href='shop-grid-right.html'> <img src="{% static 'assets/imgs/theme/icons/category-6.svg' %}" alt="">Wines & Drinks</a>
-                                        </li>
-                                        <li>
-                                            <a href='shop-grid-right.html'> <img src="{% static 'assets/imgs/theme/icons/category-7.svg' %}" alt="">Fresh Seafood</a>
-                                        </li>
-                                        <li>
-                                            <a href='shop-grid-right.html'> <img src="{% static 'assets/imgs/theme/icons/category-8.svg' %}" alt="">Fast food</a>
-                                        </li>
-                                        <li>
-                                            <a href='shop-grid-right.html'> <img src="{% static 'assets/imgs/theme/icons/category-9.svg' %}" alt="">Vegetables</a>
-                                        </li>
-                                        <li>
-                                            <a href='shop-grid-right.html'> <img src="{% static 'assets/imgs/theme/icons/category-10.svg' %}" alt="">Bread and Juice</a>
-                                        </li>
-                                    </ul>
+                                  
                                 </div>
                                 <div class="more_slide_open" style="display: none">
                                     <div class="d-flex categori-dropdown-inner">
@@ -398,44 +375,18 @@
                                             <li><a href='index-6.html'>Home 6</a></li>
                                         </ul>
                                     </li>
+                                   
                                     <li>
-                                        <a href='page-about.html'>About</a>
-                                    </li>
-                                    <li>
-                                        <a href='shop-grid-right.html'>Shop <i class="fi-rs-angle-down"></i></a>
+                                        <a href='shop-grid-right.html'>Category <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
-                                            <li><a href='shop-grid-right.html'>Shop Grid – Right Sidebar</a></li>
-                                            <li><a href='shop-grid-left.html'>Shop Grid – Left Sidebar</a></li>
-                                            <li><a href='shop-list-right.html'>Shop List – Right Sidebar</a></li>
-                                            <li><a href='shop-list-left.html'>Shop List – Left Sidebar</a></li>
-                                            <li><a href='shop-fullwidth.html'>Shop - Wide</a></li>
-                                            <li>
-                                                <a href="#">Single Product <i class="fi-rs-angle-right"></i></a>
-                                                <ul class="level-menu">
-                                                    <li><a href='shop-product-right.html'>Product – Right Sidebar</a></li>
-                                                    <li><a href='shop-product-left.html'>Product – Left Sidebar</a></li>
-                                                    <li><a href='shop-product-full.html'>Product – No sidebar</a></li>
-                                                    <li><a href='shop-product-vendor.html'>Product – Vendor Infor</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href='shop-filter.html'>Shop – Filter</a></li>
-                                            <li><a href='shop-wishlist.html'>Shop – Wishlist</a></li>
-                                            <li><a href='shop-cart.html'>Shop – Cart</a></li>
-                                            <li><a href='shop-checkout.html'>Shop – Checkout</a></li>
-                                            <li><a href='shop-compare.html'>Shop – Compare</a></li>
-                                            <li>
-                                                <a href="#">Shop Invoice<i class="fi-rs-angle-right"></i></a>
-                                                <ul class="level-menu">
-                                                    <li><a href='shop-invoice-1.html'>Shop Invoice 1</a></li>
-                                                    <li><a href='shop-invoice-2.html'>Shop Invoice 2</a></li>
-                                                    <li><a href='shop-invoice-3.html'>Shop Invoice 3</a></li>
-                                                    <li><a href='shop-invoice-4.html'>Shop Invoice 4</a></li>
-                                                    <li><a href='shop-invoice-5.html'>Shop Invoice 5</a></li>
-                                                    <li><a href='shop-invoice-6.html'>Shop Invoice 6</a></li>
-                                                </ul>
-                                            </li>
+                                            {% for c in  categories %}
+                                           <li> <a href="{% url 'core:category-product-list' c.cid %}">{{c.title}}</a></li>
+                                            {% endfor %}
+                                            <hr>
+                                            <li><a href="{% url 'core:category-list' %}"> All Categories </a></li>
                                         </ul>
                                     </li>
+                                    
                                     <li>
                                         <a href="#">Vendors <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
