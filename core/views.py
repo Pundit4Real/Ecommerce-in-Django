@@ -58,3 +58,14 @@ def vendor_detail_view(requuest, vid):
         "products": products,
     }
     return render(requuest, "core/vendor-detail.html", context)
+
+def product_detail_view(request, pid):
+    product = Product.objects.get(pid=pid)
+
+    p_image =  product.p_images.all()
+
+    context = {
+        "p": product,
+        "p_image":p_image,
+    }
+    return render(request, "core/product-detail.html", context)
