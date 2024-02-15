@@ -48,11 +48,13 @@ def vendor_list_view(requuest):
     context = {
         "vendors": vendors
     }
-    return render(requuest, "core/vendor_list.html", context)
+    return render(requuest, "core/vendor-list.html", context)
 
 def vendor_detail_view(requuest, vid):
     vendor = Vendor.objects.get(vid=vid)
+    products = Product.objects.filter(vendor=vendor,product_status="published")
     context = {
-        "vendor": vendor
+        "vendor": vendor,
+        "products": products,
     }
     return render(requuest, "core/vendor-detail.html", context)
