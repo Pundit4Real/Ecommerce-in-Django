@@ -38,7 +38,6 @@
                                             <div class="slider-nav-thumbnails">
                                                 <div><img src="{{p.image.url}}" alt="product image"></div>
                                                 {% for p in p_image  %}
-
                                                 <div><img src="{{p.images.url}}" alt="product image"></div>
                                                 {% endfor %}
 
@@ -94,14 +93,14 @@
                                             </div>
                                             <div class="font-xs">
                                                 <ul class="mr-50 float-start">
-                                                    <li class="mb-5">Type: <span class="text-brand">Organic</span></li>
-                                                    <li class="mb-5">MFG:<span class="text-brand"> Jun 4.2022</span></li>
-                                                    <li>LIFE: <span class="text-brand">70 days</span></li>
+                                                    <li class="mb-5">Type: <span class="text-brand">{{p.type}}</span></li>
+                                                    <li class="mb-5">MFG:<span class="text-brand"> {{p.mfd|date:"d M,Y"}}</span></li>
+                                                    <li>LIFE: <span class="text-brand">{{p.life}} days</span></li>
                                                 </ul>
                                                 <ul class="float-start">
-                                                    <li class="mb-5">SKU: <a href="#">FWM15VKT</a></li>
+                                                    <li class="mb-5">SKU: <a href="#">{{p.sku}}</a></li>
                                                     <li class="mb-5">Tags: <a href="#" rel="tag">Snack</a>, <a href="#" rel="tag">Organic</a>, <a href="#" rel="tag">Brown</a></li>
-                                                    <li>Stock:<span class="in-stock text-brand ml-5">8 Items In Stock</span></li>
+                                                    <li>Stock:<span class="in-stock text-brand ml-5">{{p.stock_count}} Items In Stock</span></li>
                                                 </ul>
                                             </div>
                                         </div>
