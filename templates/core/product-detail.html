@@ -99,7 +99,7 @@
                                                 </ul>
                                                 <ul class="float-start">
                                                     <li class="mb-5">SKU: <a href="#">{{p.sku}}</a></li>
-                                                    <li class="mb-5">Tags: <a href="#" rel="tag">Snack</a>, <a href="#" rel="tag">Organic</a>, <a href="#" rel="tag">Brown</a></li>
+                                                    <li class="mb-5">Tags: {% for tag in p.tags.all %}<a href="{% url 'core:tags' tag.slug %}" rel="tag"> #{{tag.name}}</a>,{% endfor %}</li>
                                                     <li>Stock:<span class="in-stock text-brand ml-5">{{p.stock_count}} Items In Stock</span></li>
                                                 </ul>
                                             </div>
