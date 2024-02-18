@@ -212,7 +212,7 @@
                             <div class="product-cart-wrap mb-30">
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
-                                        <a href='shop-product-right.html'>
+                                        <a href="{% url 'core:product-detail' p.pid %}">
                                             {% comment %} quarying the image dynamically from the database{% endcomment %}
                                             <img class="default-img" src="{{p.image.url}}" alt="">
                                             <img class="hover-img" src="{{p.image.url}}" alt="">
@@ -229,9 +229,9 @@
                                 </div>
                                 <div class="product-content-wrap">
                                     <div class="product-category">
-                                        <a href='shop-grid-right.html'>{{ p.category.title }}</a>
+                                        <a href="{% url 'core:product-detail' p.pid %}">{{ p.category.title }}</a>
                                     </div>
-                                    <h2><a href='shop-product-right.html'>{{ p.title }}</a></h2>
+                                    <h2><a href="{% url 'core:product-detail' p.pid %}">{{ p.title }}</a></h2>
                                     <div class="product-rate-cover">
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width: 90%"></div>

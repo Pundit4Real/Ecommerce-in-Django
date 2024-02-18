@@ -67,7 +67,7 @@
                                                 </div>
                                             </div>
                                             <div class="short-desc mb-30">
-                                                <p class="font-lg">{{p.description}}</p>
+                                                <p class="font-lg">{{p.description|truncatechars:200}}</p>
                                             </div>
                                             {% comment %} <div class="attr-detail attr-size mb-30">
                                                 <strong class="mr-10">Size / Weight: </strong>
@@ -125,38 +125,11 @@
                                         </ul>
                                         <div class="tab-content shop_info_tab entry-main-content">
                                             <div class="tab-pane fade show active" id="Description">
-                                                <div class="">
-                                                    <p>Uninhibited carnally hired played in whimpered dear gorilla koala depending and much yikes off far quetzal goodness and from for grimaced goodness unaccountably and meadowlark near unblushingly crucial scallop tightly neurotic hungrily some and dear furiously this apart.</p>
-                                                    <p>Spluttered narrowly yikes left moth in yikes bowed this that grizzly much hello on spoon-fed that alas rethought much decently richly and wow against the frequent fluidly at formidable acceptably flapped besides and much circa far over the bucolically hey precarious goldfinch mastodon goodness gnashed a jellyfish and one however because.</p>
-                                                    <ul class="product-more-infor mt-30">
-                                                        <li><span>Type Of Packing</span> Bottle</li>
-                                                        <li><span>Color</span> Green, Pink, Powder Blue, Purple</li>
-                                                        <li><span>Quantity Per Case</span> 100ml</li>
-                                                        <li><span>Ethyl Alcohol</span> 70%</li>
-                                                        <li><span>Piece In One</span> Carton</li>
-                                                    </ul>
-                                                    <hr class="wp-block-separator is-style-dots">
-                                                    <p>Laconic overheard dear woodchuck wow this outrageously taut beaver hey hello far meadowlark imitatively egregiously hugged that yikes minimally unanimous pouted flirtatiously as beaver beheld above forward energetic across this jeepers beneficently cockily less a the raucously that magic upheld far so the this where crud then below after jeez enchanting drunkenly more much wow callously irrespective limpet.</p>
-                                                    <h4 class="mt-30">Packaging & Delivery</h4>
-                                                    <hr class="wp-block-separator is-style-wide">
-                                                    <p>Less lion goodness that euphemistically robin expeditiously bluebird smugly scratched far while thus cackled sheepishly rigid after due one assenting regarding censorious while occasional or this more crane went more as this less much amid overhung anathematic because much held one exuberantly sheep goodness so where rat wry well concomitantly.</p>
-                                                    <p>Scallop or far crud plain remarkably far by thus far iguana lewd precociously and and less rattlesnake contrary caustic wow this near alas and next and pled the yikes articulate about as less cackled dalmatian in much less well jeering for the thanks blindly sentimental whimpered less across objectively fanciful grimaced wildly some wow and rose jeepers outgrew lugubrious luridly irrationally attractively dachshund.</p>
-                                                    <h4 class="mt-30">Suggested Use</h4>
-                                                    <ul class="product-more-infor mt-30">
-                                                        <li>Refrigeration not necessary.</li>
-                                                        <li>Stir before serving</li>
-                                                    </ul>
-                                                    <h4 class="mt-30">Other Ingredients</h4>
-                                                    <ul class="product-more-infor mt-30">
-                                                        <li>Organic raw pecans, organic raw cashews.</li>
-                                                        <li>This butter was produced using a LTG (Low Temperature Grinding) process</li>
-                                                        <li>Made in machinery that processes tree nuts but does not process peanuts, gluten, dairy or soy</li>
-                                                    </ul>
-                                                    <h4 class="mt-30">Warnings</h4>
-                                                    <ul class="product-more-infor mt-30">
-                                                        <li>Oil separation occurs naturally. May contain pieces of shell.</li>
-                                                    </ul>
-                                                </div>
+                                              <div class="">
+                                                <p>
+                                                    {{p.description}}
+                                                </p>
+                                              </div>
                                             </div>
                                             <div class="tab-pane fade" id="Additional-info">
                                                 <table class="font-md">
@@ -250,10 +223,10 @@
                                             </div>
                                             <div class="tab-pane fade" id="Vendor-info">
                                                 <div class="vendor-logo d-flex mb-30">
-                                                    <img src="{% static 'assets/imgs/vendor/vendor-18.svg' %}" alt="">
+                                                    <img src="{{p.vendor.image.url}}" alt="">
                                                     <div class="vendor-name ml-15">
                                                         <h6>
-                                                            <a href='vendor-details-2.html'>Noodles Co.</a>
+                                                            <a href='vendor-details-2.html'>{{p.vendor.title}}</a>
                                                         </h6>
                                                         <div class="product-rate-cover text-end">
                                                             <div class="product-rate d-inline-block">
@@ -264,8 +237,8 @@
                                                     </div>
                                                 </div>
                                                 <ul class="contact-infor mb-50">
-                                                    <li><img src="{% static 'assets/imgs/theme/icons/icon-location.svg' %}" alt=""><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                                    <li><img src="{% static 'assets/imgs/theme/icons/icon-contact.svg' %}" alt=""><strong>Contact Seller:</strong><span>(+91) - 540-025-553</span></li>
+                                                    <li><img src="{% static 'assets/imgs/theme/icons/icon-location.svg' %}" alt=""><strong>Address: </strong> <span>{{p.vendor.address}}</span></li>
+                                                    <li><img src="{% static 'assets/imgs/theme/icons/icon-contact.svg' %}" alt=""><strong>Contact Seller:</strong><span>{{p.vendor.contact}}</span></li>
                                                 </ul>
                                                 <div class="d-flex mb-55">
                                                     <div class="mr-30">
@@ -274,14 +247,14 @@
                                                     </div>
                                                     <div class="mr-30">
                                                         <p class="text-brand font-xs">Ship on time</p>
-                                                        <h4 class="mb-0">100%</h4>
+                                                        <h4 class="mb-0">{{p.vendor.shipping_on_time}}%</h4>
                                                     </div>
                                                     <div>
                                                         <p class="text-brand font-xs">Chat response</p>
-                                                        <h4 class="mb-0">89%</h4>
+                                                        <h4 class="mb-0">{{p.vendor.chat_resp_time}}%</h4>
                                                     </div>
                                                 </div>
-                                                <p>Noodles & Company is an American fast-casual restaurant that offers international and American noodle dishes and pasta in addition to soups and salads. Noodles & Company was founded in 1995 by Aaron Kennedy and is headquartered in Broomfield, Colorado. The company went public in 2013 and recorded a $457 million revenue in 2017.In late 2018, there were 460 Noodles & Company locations across 29 states and Washington, D.C.</p>
+                                                <p>{{p.vendor.description}}</p>
                                             </div>
                                             <div class="tab-pane fade" id="Reviews">
                                                 <!--Comments-->
@@ -422,18 +395,21 @@
                                     </div>
                                 </div>
                                 <div class="row mt-60">
+                                    {% if products %}
                                     <div class="col-12">
                                         <h2 class="section-title style-1 mb-30">Related products</h2>
                                     </div>
+                                    {% endif %}
                                     <div class="col-12">
                                         <div class="row related-products">
+                                            {% for p in products %}
                                             <div class="col-lg-3 col-md-4 col-12 col-sm-6">
                                                 <div class="product-cart-wrap hover-up">
                                                     <div class="product-img-action-wrap">
                                                         <div class="product-img product-img-zoom">
-                                                            <a href='shop-product-right.html' tabindex='0'>
-                                                                <img class="default-img" src="{% static 'assets/imgs/shop/product-2-1.jpg' %}" alt="">
-                                                                <img class="hover-img" src="{% static 'assets/imgs/shop/product-2-2.jpg' %}" alt="">
+                                                            <a href="{% url 'core:product-detail' p.pid %}" tabindex='0'>
+                                                                <img class="default-img" src="{{p.image.url}}" alt="">
+                                                                <img class="hover-img" src="{{p.image.url}}" alt="">
                                                             </a>
                                                         </div>
                                                         <div class="product-action-1">
@@ -442,111 +418,22 @@
                                                             <a aria-label='Compare' class='action-btn small hover-up' href='shop-compare.html' tabindex='0'><i class="fi-rs-shuffle"></i></a>
                                                         </div>
                                                         <div class="product-badges product-badges-position product-badges-mrg">
-                                                            <span class="hot">Hot</span>
+                                                            <span class="hot">{{p.get_percentage|floatformat:0}}%</span>
                                                         </div>
                                                     </div>
                                                     <div class="product-content-wrap">
-                                                        <h2><a href='shop-product-right.html' tabindex='0'>Ulstra Bass Headphone</a></h2>
+                                                        <h2><a href="{% url 'core:product-detail' p.pid %}" tabindex='0'>{{p.title|truncatechars:20}}</a></h2>
                                                         <div class="rating-result" title="90%">
                                                             <span> </span>
                                                         </div>
                                                         <div class="product-price">
-                                                            <span>$238.85 </span>
-                                                            <span class="old-price">$245.8</span>
+                                                            <span>${{p.price}} </span>
+                                                            <span class="old-price">${{p.old_price}}</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                                <div class="product-cart-wrap hover-up">
-                                                    <div class="product-img-action-wrap">
-                                                        <div class="product-img product-img-zoom">
-                                                            <a href='shop-product-right.html' tabindex='0'>
-                                                                <img class="default-img" src="{% static 'assets/imgs/shop/product-3-1.jpg' %}" alt="">
-                                                                <img class="hover-img" src="{% static 'assets/imgs/shop/product-4-2.jpg' %}" alt="">
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-action-1">
-                                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                                            <a aria-label='Add To Wishlist' class='action-btn small hover-up' href='shop-wishlist.html' tabindex='0'><i class="fi-rs-heart"></i></a>
-                                                            <a aria-label='Compare' class='action-btn small hover-up' href='shop-compare.html' tabindex='0'><i class="fi-rs-shuffle"></i></a>
-                                                        </div>
-                                                        <div class="product-badges product-badges-position product-badges-mrg">
-                                                            <span class="sale">-12%</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-content-wrap">
-                                                        <h2><a href='shop-product-right.html' tabindex='0'>Smart Bluetooth Speaker</a></h2>
-                                                        <div class="rating-result" title="90%">
-                                                            <span> </span>
-                                                        </div>
-                                                        <div class="product-price">
-                                                            <span>$138.85 </span>
-                                                            <span class="old-price">$145.8</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                                <div class="product-cart-wrap hover-up">
-                                                    <div class="product-img-action-wrap">
-                                                        <div class="product-img product-img-zoom">
-                                                            <a href='shop-product-right.html' tabindex='0'>
-                                                                <img class="default-img" src="{% static 'assets/imgs/shop/product-4-1.jpg' %}" alt="">
-                                                                <img class="hover-img" src="{% static 'assets/imgs/shop/product-4-2.jpg' %}" alt="">
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-action-1">
-                                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                                            <a aria-label='Add To Wishlist' class='action-btn small hover-up' href='shop-wishlist.html' tabindex='0'><i class="fi-rs-heart"></i></a>
-                                                            <a aria-label='Compare' class='action-btn small hover-up' href='shop-compare.html' tabindex='0'><i class="fi-rs-shuffle"></i></a>
-                                                        </div>
-                                                        <div class="product-badges product-badges-position product-badges-mrg">
-                                                            <span class="new">New</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-content-wrap">
-                                                        <h2><a href='shop-product-right.html' tabindex='0'>HomeSpeak 12UEA Goole</a></h2>
-                                                        <div class="rating-result" title="90%">
-                                                            <span> </span>
-                                                        </div>
-                                                        <div class="product-price">
-                                                            <span>$738.85 </span>
-                                                            <span class="old-price">$1245.8</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-12 col-sm-6 d-lg-block d-none">
-                                                <div class="product-cart-wrap hover-up mb-0">
-                                                    <div class="product-img-action-wrap">
-                                                        <div class="product-img product-img-zoom">
-                                                            <a href='shop-product-right.html' tabindex='0'>
-                                                                <img class="default-img" src="{% static 'assets/imgs/shop/product-5-1.jpg' %}" alt="">
-                                                                <img class="hover-img" src="{% static 'assets/imgs/shop/product-3-2.jpg' %}" alt="">
-                                                            </a>
-                                                        </div>
-                                                        <div class="product-action-1">
-                                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                                            <a aria-label='Add To Wishlist' class='action-btn small hover-up' href='shop-wishlist.html' tabindex='0'><i class="fi-rs-heart"></i></a>
-                                                            <a aria-label='Compare' class='action-btn small hover-up' href='shop-compare.html' tabindex='0'><i class="fi-rs-shuffle"></i></a>
-                                                        </div>
-                                                        <div class="product-badges product-badges-position product-badges-mrg">
-                                                            <span class="hot">Hot</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="product-content-wrap">
-                                                        <h2><a href='shop-product-right.html' tabindex='0'>Dadua Camera 4K 2022EF</a></h2>
-                                                        <div class="rating-result" title="90%">
-                                                            <span> </span>
-                                                        </div>
-                                                        <div class="product-price">
-                                                            <span>$89.8 </span>
-                                                            <span class="old-price">$98.8</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            {% endfor %}
                                         </div>
                                     </div>
                                 </div>
@@ -559,8 +446,13 @@
                                     <li>
                                         <i class="fi fi-rs-marker mr-10 text-brand"></i>
                                         <span>
-                                            5171 W Campbell Ave <br>
-                                            undefined Kent, Utah 53127 <br>United States
+                                            {{ address.address }}<br>
+                                             <br>
+                                             {% if address.status == True %}
+                                             <span class="text-success"> Verified Address </span>
+                                             {% else %}
+                                             <span class="text-danger"> Unverified Address  </span>
+                                             {% endif %}
                                         </span>
                                         <a href="#" class="change float-end">Change</a>
                                     </li>
@@ -570,25 +462,25 @@
                                 <ul>
                                     <li>
                                         <i class="fi fi-rs-shield-check mr-10 text-brand"></i>
-                                        <span> 100% Authentic </span>
+                                        <span>{{p.vendor.authentic_rating}}% Authentic </span>
                                     </li>
                                     <li>
                                         <i class="fi fi-rs-time-forward-ten mr-10 text-brand"></i>
-                                        <span> 10 Days Return </span>
+                                        <span> {{p.vendor.days_return}} Days Return </span>
                                     </li>
                                     <li>
                                         <i class="fi fi-rs-diploma mr-10 text-brand"></i>
-                                        <span> 12 Months Warranty </span>
+                                        <span> {{p.vendor.warranty_period}} Months Warranty </span>
                                     </li>
                                 </ul>
                             </div>
                             <div class="sidebar-widget widget-vendor mb-30 bg-grey-9 box-shadow-none">
                                 <h5 class="section-title style-3 mb-20">Vendor</h5>
                                 <div class="vendor-logo d-flex mb-30">
-                                    <img src="{% static 'assets/imgs/vendor/vendor-18.svg' %}" alt="">
+                                    <img src="{{p.vendor.image.url}}" alt="">
                                     <div class="vendor-name ml-15">
                                         <h6>
-                                            <a href='vendor-details-2.html'>Noodles Co.</a>
+                                            <a href="'vendor-details-2.html'">{{p.vendor.title}}</a>
                                         </h6>
                                         <div class="product-rate-cover text-end">
                                             <div class="product-rate d-inline-block">
@@ -599,8 +491,8 @@
                                     </div>
                                 </div>
                                 <ul class="contact-infor">
-                                    <li><img src="{% static 'assets/imgs/theme/icons/icon-location.svg' %}" alt=""><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                                    <li><img src="{% static 'assets/imgs/theme/icons/icon-contact.svg' %}" alt=""><strong>Contact Seller:</strong><span>(+91) - 540-025-553</span></li>
+                                    <li><img src="{% static 'assets/imgs/theme/icons/icon-location.svg' %}" alt=""><strong>Address: </strong> <span>{{p.vendor.address}}</span></li>
+                                    <li><img src="{% static 'assets/imgs/theme/icons/icon-contact.svg' %}" alt=""><strong>Contact Seller:</strong><span>{{p.vendor.contact}}</span></li>
                                     <li class="hr"><span></span></li>
                                 </ul>
                                 <div class="d-flex justify-content-between">
@@ -610,11 +502,11 @@
                                     </div>
                                     <div>
                                         <p class="text-brand font-xs">Ship on time</p>
-                                        <h4 class="mb-0">100%</h4>
+                                        <h4 class="mb-0">{{p.vendor.shipping_on_time}}%</h4>
                                     </div>
                                     <div>
                                         <p class="text-brand font-xs">Chat response</p>
-                                        <h4 class="mb-0">89%</h4>
+                                        <h4 class="mb-0">{{p.vendor.chat_resp_time}}%</h4>
                                     </div>
                                 </div>
                                 <ul>
