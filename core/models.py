@@ -3,6 +3,7 @@ from userauths.models import User
 from shortuuid.django_fields import ShortUUIDField
 from django.utils.html import mark_safe
 from taggit.managers import TaggableManager
+from ckeditor_uploader.fields import RichTextUploadingField
 # Create your models here.
 
 
@@ -56,7 +57,8 @@ class Vendor(models.Model):
     title= models.CharField(max_length=100, default="")
     image = models.ImageField(upload_to=user_directory_path, default="vendor.jpg")
     cover_image = models.ImageField(upload_to=user_directory_path, default="vendor.jpg")
-    description = models.TextField(null = True, blank=True, default="I'm an amazing vendor")
+    # description = models.TextField(null = True, blank=True, default="I'm an amazing vendor")
+    description = RichTextUploadingField(null = True, blank=True, default="I'm an amazing vendor")
 
     address= models.CharField(max_length=100, default="123 Main Street.")
     contact = models.CharField(max_length=100, default="+233 (598) 193277")
@@ -88,11 +90,11 @@ class Product(models.Model):
 
     title = models.CharField(max_length=100, default="Fresh items")
     image = models.ImageField(upload_to=user_directory_path,default="product.jpg")
-    description = models.TextField(null = True, blank=True, default="This is the product")
+    description = RichTextUploadingField(null = True, blank=True, default="This is the product") # ckeditor
     price = models.DecimalField(max_digits=9999999999,decimal_places=2,default="")
     old_price = models.DecimalField(max_digits=999999999, decimal_places=2, default="")
 
-    specifications = models.TextField(null = True, blank=True, default="")
+    specifications = RichTextUploadingField(null = True, blank=True, default="") # richtextuploading filds
     type = models.CharField(max_length=100, default="Organic", null=True,blank=True)
     stock_count = models.CharField(max_length=100,default="10", null=True,blank=True)
     life = models.CharField(max_length=100,default="150 Days",null=True,blank=True)

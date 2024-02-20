@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 
     #third party apps
     'taggit',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -154,3 +155,5 @@ JAZZMIN_SETTINGS ={
 
 
 AUTH_USER_MODEL = 'userauths.User'
+
+CKEDITOR_UPLOAD_PATH = 'content/ckeditor/'
