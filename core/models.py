@@ -90,6 +90,7 @@ class Product(models.Model):
 
     title = models.CharField(max_length=100, default="Fresh items")
     image = models.ImageField(upload_to=user_directory_path,default="product.jpg")
+    # description = models.TextField(null = True, blank=True, default="This is the product") # ckeditor
     description = RichTextUploadingField(null = True, blank=True, default="This is the product") # ckeditor
     price = models.DecimalField(max_digits=9999999999,decimal_places=2,default="")
     old_price = models.DecimalField(max_digits=999999999, decimal_places=2, default="")

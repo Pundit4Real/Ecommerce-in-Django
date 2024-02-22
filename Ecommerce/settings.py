@@ -156,4 +156,20 @@ JAZZMIN_SETTINGS ={
 
 AUTH_USER_MODEL = 'userauths.User'
 
-CKEDITOR_UPLOAD_PATH = 'content/ckeditor/'
+CKEDITOR_UPLOAD_PATH = 'uploads/ckeditor/'
+
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'skin':'moono',
+        'codeSnippet_theme':'monokai',
+        'toolbar': 'all',
+        'extraPlugins': ','.join(
+            [
+                'codesnippet',
+                'widget',
+                'dialog'
+            ]
+        ),
+    }
+}
