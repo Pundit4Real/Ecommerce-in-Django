@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse,get_object_or_404
 from django.db.models import Count,Avg
 from taggit.models import Tag
 from core.models import Product,Vendor, Category, CartOrder,CartOrderItems, ProductImages,ProductReview, Wishlist,Address
+from core.models import ProductImages
 # Create your views here.
 
 
