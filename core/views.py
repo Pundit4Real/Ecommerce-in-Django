@@ -30,19 +30,27 @@ def product_detail_view(request, pid):
     products=Product.objects.filter(category=product.category).exclude(pid=pid)
 
     #Getting all reviews
-    reviews = ProductReview.objects.filter(product=product).order_by('-date')
+    reviews = ProductReview.objects.filter(product=product).order_by("-date")
 
     #Getting average reviews related to a product
-
     average_rating = ProductReview.objects.filter(product=product).aggregate(rating=Avg('rating'))
 
     #product Review form
     review_form = ProductReviewForm()
 
+    make_review = True
+
+    if request.user.is_authenticated:
+        user_review_count = ProductReview.objects.filter(user=request.user, product=product).count ()
+
+        if user_review_count > 0:
+            make_review = False
+
     p_image =  product.p_images.all()
 
     context = {
         "p": product,
+        "make_review": make_review,
         "review_form": review_form,
         "p_image":p_image,
         "reviews": reviews,

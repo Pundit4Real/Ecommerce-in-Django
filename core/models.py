@@ -187,7 +187,7 @@ class ProductReview(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, related_name="reviews")
     review = models.CharField(max_length=255)
     rating = models.IntegerField(choices= RATING, default=None)
-    date = models.DateField(auto_now=True)
+    date = models.DateTimeField(auto_now=True)
 
     class meta:
         verbose_name_plural = "Product Reviews"

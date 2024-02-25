@@ -8,7 +8,7 @@ $("#commentForm").submit(function(e){
     e.preventDefault();
 
 let date = new Date();
-let time = dt.getDay() +  "  "  + monthNames[date.getUTCMonth()] + ", " + date.getFullYear()
+let time = date.getDate() +  "  "  + monthNames[date.getMonth()] + ", " + date.getFullYear()
 
     $.ajax({
         data: $(this).serialize(),
@@ -25,7 +25,7 @@ let time = dt.getDay() +  "  "  + monthNames[date.getUTCMonth()] + ", " + date.g
 
             if(resp.bool==true){
                 $("#review-resp").html("Review added successfully.")
-                // $(".hide-comment-form").hide()
+                $(".hide-comment-form").hide()
                 $(".add-review").hide()
 
                 // appending the form
@@ -39,7 +39,7 @@ let time = dt.getDay() +  "  "  + monthNames[date.getUTCMonth()] + ", " + date.g
                     _html += '<div class="desc">'
                     _html += '<div class="d-flex justify-content-between mb-10">'
                     _html += '<div class="d-flex align-items-center">'
-                    _html += '<span class="font-xs text-muted"> " + time + "</span>'
+                    _html += '<span class="font-xs text-muted">' + time + '</span>'
                     _html += '</div>'
 
                     for(let i = 1; i<=resp.context.rating; i++){
@@ -53,8 +53,8 @@ let time = dt.getDay() +  "  "  + monthNames[date.getUTCMonth()] + ", " + date.g
                     _html += '</div>'
                     _html += '</div>'
 
-                    $(".comment-list").prepend(_html)
-            }
+                    $(".comment-list").prepend(_html); // Prepend the new review to the top of the list
+                }
 
         }
     })
