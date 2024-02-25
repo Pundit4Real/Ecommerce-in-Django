@@ -3,124 +3,31 @@
 
 {% block content %}
     <main class="main">
-        <div class="page-header breadcrumb-wrap">
+        <div class="page-header mt-30 mb-50">
             <div class="container">
-                <div class="breadcrumb">
-                    <a href='index.htm' rel='nofollow'><i class="fi-rs-home mr-5"></i>Home</a>
-                    <span></span> Shop <span></span> Fillter
-                </div>
-            </div>
-        </div>
-        <div class="container mb-30 mt-30">
-            <div class="row">
-                <div class="col-lg-12">
-                    <a class="shop-filter-toogle" href="#">
-                        <span class="fi-rs-filter mr-5"></span>
-                        Filters
-                        <i class="fi-rs-angle-small-down angle-down"></i>
-                        <i class="fi-rs-angle-small-up angle-up"></i>
-                    </a>
-                    <div class="shop-product-fillter-header">
-                        <div class="row">
-                            <div class="col-xl-3 col-lg-6 col-md-6 mb-lg-0 mb-md-2 mb-sm-2">
-                                <div class="card">
-                                    <h5 class="mb-30">By Categories</h5>
-                                    <div class="categories-dropdown-wrap font-heading">
-                                        <ul>
-                                            {% for c in categories %}
-                                            <li>
-                                                <input class="form-check-input filter-checkbox" data-filter="category" type="checkbox" name="checkbox" id="exampleCheckbox2" value="{{ c.id }}">
-                                                &nbsp; &nbsp;
-                                                <a href="{% url 'core:category-product-list' c.cid %}"> <img src="{{c.image.url}}" alt="">{{ c.title}}</a>
-                                            </li>
-                                           {% endfor %}
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-6 col-md-6 mb-lg-0 mb-md-2 mb-sm-2">
-                                <div class="card">
-                                    <h5 class="mb-30">By Vendors</h5>
-                                    <div class="d-flex">
-                                        <div class="custom-checkbox mr-80">
-                                            {% for v in vendors %}
-                                            <input class="form-check-input filter-checkbox" data-filter="vendor" type="checkbox" name="checkbox" id="exampleCheckbox1" value="{{ v.id }}">&nbsp;
-                                            <label class="form-check-label" for="exampleCheckbox1"><span>{{v.title}}</span></label>
-                                            <br> <br>
-                                           {% endfor %}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-6 col-md-6 mb-lg-0 mb-md-2 mb-sm-2">
-                                <div class="card">
-                                    <h5 class="mb-30">By Tags</h5>
-                                    <div class="sidebar-widget widget-tags">
-                                        <ul class="tags-list">
-                                            <li class="hover-up">
-                                                <a href='blog-category-grid.html'><i class="fi-rs-cross mr-10"></i>Milk</a>
-                                            </li>
-                                            <li class="hover-up">
-                                                <a href='blog-category-grid.html'><i class="fi-rs-cross mr-10"></i>Broccoli</a>
-                                            </li>
-                                            <li class="hover-up">
-                                                <a href='blog-category-grid.html'><i class="fi-rs-cross mr-10"></i>Smoothie</a>
-                                            </li>
-                                            <li class="hover-up">
-                                                <a href='blog-category-grid.html'><i class="fi-rs-cross mr-10"></i>Fruit</a>
-                                            </li>
-                                            <li class="hover-up mr-0">
-                                                <a href='blog-category-grid.html'><i class="fi-rs-cross mr-10"></i>Salad</a>
-                                            </li>
-                                            <li class="hover-up mr-0">
-                                                <a href='blog-category-grid.html'><i class="fi-rs-cross mr-10"></i>Appetizer</a>
-                                            </li>
-                                            <li class="hover-up mr-0 mb-0">
-                                                <a href='blog-category-grid.html'><i class="fi-rs-cross mr-10"></i>Appetizer</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-6 col-md-6 mb-lg-0 mb-md-5 mb-sm-5">
-                                <div class="card">
-                                    <h5 class="mb-10">By Price</h5>
-                                    <div class="sidebar-widget price_range range">
-                                        <div class="price-filter mb-20">
-                                            <div class="price-filter-inner">
-                                                <div id="slider-range" class="mb-20"></div>
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="caption">From: <strong id="slider-range-value1" class="text-brand"></strong></div>
-                                                    <div class="caption">To: <strong id="slider-range-value2" class="text-brand"></strong></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="custome-checkbox">
-                                            <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox211" value="">
-                                            <label class="form-check-label" for="exampleCheckbox211"><span>$0.00 - $20.00 </span></label>
-                                            <br>
-                                            <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox22" value="">
-                                            <label class="form-check-label" for="exampleCheckbox22"><span>$20.00 - $40.00 </span></label>
-                                            <br>
-                                            <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox23" value="">
-                                            <label class="form-check-label" for="exampleCheckbox23"><span>$40.00 - $60.00 </span></label>
-                                            <br>
-                                            <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox24" value="">
-                                            <label class="form-check-label" for="exampleCheckbox24"><span>$60.00 - $80.00 </span></label>
-                                            <br>
-                                            <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox25" value="">
-                                            <label class="form-check-label" for="exampleCheckbox25"><span>Over $100.00</span></label>
-                                        </div>
-                                    </div>
-                                </div>
+                <div class="archive-header">
+                    <div class="row align-items-center">
+                        <div class="col-xl-3">
+                            {% if query %}
+                            <h2 class="mb-15">{{query}}</h2>
+                            {% else %}
+                            <h3 class="mb-15">No Search Item</h3>
+                            {% endif %}
+                            <div class="breadcrumb">
+                                <a href='index.htm' rel='nofollow'><i class="fi-rs-home mr-5"></i>Home</a>
+                                <span></span> Shop <span></span> {{query}}
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="container mb-30">
+            <div class="row">
                 <div class="col-12">
                     <div class="shop-product-fillter">
                         <div class="totall-product">
-                            <p>We found <strong class="text-brand">29</strong> items for you!</p>
+                            <p>We found <strong class="text-brand">{{products.count}}</strong> item{{products.count|pluralize}} for you!</p>
                         </div>
                         <div class="sort-by-product-area">
                             <div class="sort-by-cover mr-10">
@@ -163,14 +70,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row product-grid" id = "filltered-product">
-
+                    <div class="row product-grid">
+                      
                         {% for p in products %}
                         <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                             <div class="product-cart-wrap mb-30">
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
-                                        <a href="{% url 'core:product-detail' p.pid %}">
+                                        <a href='shop-product-right.html'>
                                             {% comment %} quarying the image dynamically from the database{% endcomment %}
                                             <img class="default-img" src="{{p.image.url}}" alt="">
                                             <img class="hover-img" src="{{p.image.url}}" alt="">
@@ -187,9 +94,9 @@
                                 </div>
                                 <div class="product-content-wrap">
                                     <div class="product-category">
-                                        <a href="{% url 'core:product-detail' p.pid %}">{{ p.category.title }}</a>
+                                        <a href='shop-grid-right.html'>{{ p.category.title }}</a>
                                     </div>
-                                    <h2><a href="{% url 'core:product-detail' p.pid %}">{{ p.title }}</a></h2>
+                                    <h2><a href='shop-product-right.html'>{{ p.title }}</a></h2>
                                     <div class="product-rate-cover">
                                         <div class="product-rate d-inline-block">
                                             <div class="product-rating" style="width: 90%"></div>
@@ -212,10 +119,11 @@
                             </div>
                         </div>
                         {% endfor %}
-
+                        <!--end product card-->
+              
                     </div>
                     <!--product grid-->
-                    {% comment %} <div class="pagination-area mt-20 mb-20">
+                    <div class="pagination-area mt-20 mb-20">
                         <nav aria-label="Page navigation example">
                             <ul class="pagination justify-content-start">
                                 <li class="page-item">
@@ -231,7 +139,7 @@
                                 </li>
                             </ul>
                         </nav>
-                    </div> {% endcomment %}
+                    </div>
                     <section class="section-padding pb-5">
                         <div class="section-title">
                             <h3 class="">Deals Of The Day</h3>
@@ -396,4 +304,5 @@
             </div>
         </div>
     </main>
+
 {% endblock content %}

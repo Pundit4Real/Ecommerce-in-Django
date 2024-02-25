@@ -1,0 +1,47 @@
+{% for p in products %}
+<div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
+    <div class="product-cart-wrap mb-30">
+        <div class="product-img-action-wrap">
+            <div class="product-img product-img-zoom">
+                <a href="{% url 'core:product-detail' p.pid %}">
+                    {% comment %} quarying the image dynamically from the database{% endcomment %}
+                    <img class="default-img" src="{{p.image.url}}" alt="">
+                    <img class="hover-img" src="{{p.image.url}}" alt="">
+                </a>
+            </div>
+            <div class="product-action-1">
+                <a aria-label='Add To Wishlist' class='action-btn' href='shop-wishlist.html'><i class="fi-rs-heart"></i></a>
+                <a aria-label='Compare' class='action-btn' href='shop-compare.html'><i class="fi-rs-shuffle"></i></a>
+                <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+            </div>
+            <div class="product-badges product-badges-position product-badges-mrg">
+                <span class="hot">-{{ p.get_percentage|floatformat:0 }}%</span>
+            </div>
+        </div>
+        <div class="product-content-wrap">
+            <div class="product-category">
+                <a href="{% url 'core:product-detail' p.pid %}">{{ p.category.title }}</a>
+            </div>
+            <h2><a href="{% url 'core:product-detail' p.pid %}">{{ p.title }}</a></h2>
+            <div class="product-rate-cover">
+                <div class="product-rate d-inline-block">
+                    <div class="product-rating" style="width: 90%"></div>
+                </div>
+                <span class="font-small ml-5 text-muted"> {{ p.ProductReview.rating }}</span>
+            </div>
+            <div>
+                <span class="font-small text-muted">By <a href='vendor-details-1.html'>{{p.vendor}}</a></span>
+            </div>
+            <div class="product-card-bottom">
+                <div class="product-price">
+                    <span>${{ p.price }}</span>
+                    <span class="old-price">${{ p.old_price }}</span>
+                </div>
+                <div class="add-cart">
+                    <a class='add' href='shop-cart.html'><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
