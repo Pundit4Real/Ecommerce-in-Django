@@ -162,19 +162,25 @@ def filter_product(request):
     categories = request.GET.getlist("category[]")
     vendors = request.GET.getlist("vendor[]")
 
-    prodeucts = Product.objects.filter(product_status="published").order_by("-id").distinct()
+    min_price = request.GET['min_price']
+    max_price = request.GET['max_price']
+
+    products = Product.objects.filter(product_status="published").order_by("-id").distinct()
+
+    products = products.filter(price__gte=min_price) #7
+    products = products.filter(price__lte=max_price) #250
 
     if len(categories)> 0:
-        prodeucts = prodeucts.filter(category__id__in=categories).distinct()
+        products = products.filter(category__id__in=categories).distinct()
 
     if len(vendors)> 0:
-        prodeucts = prodeucts.filter(vendor__id__in=vendors).distinct()
+        products = products.filter(vendor__id__in=vendors).distinct()
 
 
     context = {
-        "products": prodeucts
+        "products": products
     }
 
-    data = render_to_string("core/async/product-list.html", {"products": prodeucts})
+    data = render_to_string("core/async/product-list.html", {"products": products})
 
     return JsonResponse({"data":data})
