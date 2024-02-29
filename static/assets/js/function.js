@@ -128,5 +128,36 @@ $(document).ready(function(){
 
 // Add to cart functionality
 $("#add-to-cart-btn").on("click", function(){
-    let quantity = $("#product-quantity")
+    let quantity = $("#product-quantity").val()
+    let product_title = $(".product-title").val()
+    let product_id = $(".product-id").val()
+    let product_price = $("#current-product-price").text()
+    let this_val = $(this)
+
+    // console.log("quty:", quantity)
+    // console.log("title:", product_title)
+    // console.log("price:", product_price)
+    // console.log("id:", product_id)
+
+    $.ajax({
+        url: '/add-to-cart',
+        data:{
+            'id': product_id,
+            'qty': quantity,
+            'title': product_title,
+            'price': product_price,
+
+        },
+        dataType: 'json',
+        beforeSend: function(){
+            console.log("Adding product to cart.....")
+        },
+        success: function(resp){
+            this_val.html("Item added to cart")
+            console.log("Added product to cart")
+        }
+    })
+
+
+
 })
