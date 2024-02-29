@@ -126,4 +126,7 @@ $(document).ready(function(){
 })
 
 
-// 
+// Add to cart functionality
+$("#add-to-cart-btn").on("click", function(){
+    let quantity = $("#product-quantity")
+})
