@@ -112,6 +112,9 @@
                                                         <span class="old-price">${{ p.old_price }}</span>
                                                     </div>
                                                     <div class="add-cart">
+                                                        <input type="hidden" value="1" id="product-quantity" class="product-quantity-{{ p.id }}">
+                                                        <input type="hidden" class="prodduct-pid-{{ p.id }}" value="{{ p.pid }}">
+                                                        <input type="text" class="product-image-{{ p.id }}">
                                                         <a class='add' href='shop-cart.html'><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                                     </div>
                                                 </div>
