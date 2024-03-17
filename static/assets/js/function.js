@@ -152,9 +152,10 @@ $("#add-to-cart-btn").on("click", function(){
         beforeSend: function(){
             console.log("Adding product to cart.....")
         },
-        success: function(resp){
+        success: function(response){
             this_val.html("Item added to cart")
-            console.log("Added product to cart")
+            console.log("Added product to cart");
+            $(".cart-items-count").text(response.totalcartitems)
         }
     })
 
