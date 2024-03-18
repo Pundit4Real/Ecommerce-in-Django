@@ -29,10 +29,11 @@ urlpatterns = [
 
     #search
     path("search/", views.search_view, name = "search"),
-    
+
     #filter product url
     path("filter-products/", views.filter_product, name="filter-product"),
-
+    
+    #add to cart
     path("add-to-cart/", views.add_to_cart, name="add-to-cart"),
 
 ]
