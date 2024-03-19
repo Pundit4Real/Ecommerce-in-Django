@@ -32,8 +32,10 @@ urlpatterns = [
 
     #filter product url
     path("filter-products/", views.filter_product, name="filter-product"),
-    
-    #add to cart
+
+    #add to cart url
     path("add-to-cart/", views.add_to_cart, name="add-to-cart"),
+    # cart Page url
+    path("cart/", views.cart_view, name="cart"),
 
 ]

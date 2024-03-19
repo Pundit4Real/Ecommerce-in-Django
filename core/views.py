@@ -5,6 +5,7 @@ from taggit.models import Tag
 from core.models import Product,Vendor, Category, CartOrder,CartOrderItems, ProductImages,ProductReview, Wishlist,Address
 from core.forms import ProductReviewForm
 from django.template.loader import render_to_string
+from django.contrib import messages
 # Create your views here.
 
 
@@ -211,3 +212,14 @@ def add_to_cart(request):
     else:
         request.session['cart_data_obj'] = cart_product
     return JsonResponse({"data":request.session['cart_data_obj'], 'totalcartitems':len(request.session['cart_data_obj'])})
+
+
+def cart_view(request):
+    cart_total_amount = 0
+    if 'cart_data_obj' in request.session:
+        for p_id, item in request.session['cart_data_obj'].items():
+            cart_total_amount += int(item['qty']) * float(item['price'])
+        return render(request, "core/cart.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount })
+    else:
+        messages.warning(request,"Your cart is empty")
+        return render(request,"core/index.html")
