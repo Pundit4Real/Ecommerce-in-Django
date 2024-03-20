@@ -224,6 +224,7 @@ def cart_view(request):
         messages.warning(request,"Your cart is empty")
         return render(request,"core/index.html")
     
+#Deleting from cart functions
 def delete_item_from_cart(request):
     product_id = str(request.GET['id'])
     if 'cart_data_obj' in request.session:
@@ -240,5 +241,23 @@ def delete_item_from_cart(request):
     context = render_to_string("core/async/cart-list.html",{"cart_data":request.session['cart_data_obj'], 'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount }) 
     return JsonResponse({"data":context, 'totalcartitems':len(request.session['cart_data_obj'])})
 
+
+#updating the cart items functions
 def update_cart(request):
-    pass
+    product_id = str(request.GET['id'])
+    product_qty = request.GET['qty']
+
+    if 'cart_data_obj' in request.session:
+        if product_id in request.session['cart_data_obj']:
+            cart_data = request.session['cart_data_obj']
+            product_qty = cart_data[str(request.GET['id'])]['qty']
+            request.session['cart_data_obj'] = cart_data
+
+    cart_total_amount = 0
+    if 'cart_data_obj' in request.session:
+        for p_id, item in request.session['cart_data_obj'].items():
+            cart_total_amount += int(item['qty']) * float(item['price'])
+    
+    context = render_to_string("core/async/cart-list.html",{"cart_data":request.session['cart_data_obj'], 'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount }) 
+    return JsonResponse({"data":context, 'totalcartitems':len(request.session['cart_data_obj'])})
+
