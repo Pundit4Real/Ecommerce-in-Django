@@ -37,5 +37,11 @@ urlpatterns = [
     path("add-to-cart/", views.add_to_cart, name="add-to-cart"),
     # cart Page url
     path("cart/", views.cart_view, name="cart"),
+    #Delete Item From Cart
+    path("delete-from-cart/", views.delete_item_from_cart, name="delete-from-cart"),
+    #Update cart items
+    path("update-cart/", views.update_cart, name="update-cart"),
+
+
 
 ]
