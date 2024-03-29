@@ -674,9 +674,11 @@
                     <div class="border p-40 cart-totals ml-30 mb-50">
                         <div class="d-flex align-items-end justify-content-between mb-30">
                             <h4>Your Order</h4>
-                            <h6 class="text-muted">Subtotal</h6>
+                            <h6 class="text-muted">Subtotal - <span class="text-brand">${{cart_total_amount|floatformat:2}}</span></h6>
                         </div>
                         <div class="divider-2 mb-30"></div>
+                        <a href=" {% url 'core:cart' %}" class="btn btn-fill-out btn-block mt-30 mb-40">Go back to cart</a><br>
+
                         <div class="table-responsive order_table checkout">
                             <table class="table no-border">
                                 <tbody> 
@@ -684,16 +686,16 @@
                                     <tr>
                                         <td class="image product-thumbnail"><img src="{{item.image }}" alt="#"></td>
                                         <td>
-                                            <h6 class="w-160 mb-5"><a class='text-heading' href='shop-product-full.html'>{{item.title}}</a></h6>
+                                            <h6 class="w-160 mb-5"><a class='text-heading' href="{% url 'core:product-detail' item.pid %} ">{{item.title}}</a></h6>
                                         </td>
                                         <td>
-                                            <h6 class="text-muted pl-20 pr-20">{{ item.qty }}</h6>
+                                            <h6 class="text-muted pl-20 pr-20">x{{item.qty}}</h6>
                                         </td>
                                         <td>
-                                            <h5 class="text-muted">{{ item.total }}</h5>
+                                            <h5 class="text-muted">{{ item.price }}</h5>
                                         </td>
                                         <td>
-                                            <h4 class="text-brand">{{ item.price }}</h4>
+                                            <h5 class="text-brand">${% widthratio item.price 1 item.qty %}</h5>
                                         </td>
                                     </tr>
                                   
@@ -724,7 +726,6 @@
                             <img class="mr-15" src="{% static 'assets/imgs/theme/icons/payment-master.svg' %}" alt="">
                             <img src="{% static 'assets/imgs/theme/icons/payment-zapper.svg' %}" alt="">
                         </div>
-                        <a href="#" class="btn btn-fill-out btn-block mt-30">Place an Order<i class="fi-rs-sign-out ml-15"></i></a>
                     </div>
                 </div>
             </div>
