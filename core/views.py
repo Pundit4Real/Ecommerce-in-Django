@@ -250,7 +250,7 @@ def update_cart(request):
     if 'cart_data_obj' in request.session:
         if product_id in request.session['cart_data_obj']:
             cart_data = request.session['cart_data_obj']
-            product_qty = cart_data[str(request.GET['id'])]['qty']
+            cart_data[str(request.GET['id'])]['qty'] = product_qty
             request.session['cart_data_obj'] = cart_data
 
     cart_total_amount = 0

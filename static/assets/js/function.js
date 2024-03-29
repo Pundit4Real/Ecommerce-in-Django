@@ -207,21 +207,21 @@ $(document).ready(function(){
         console.log("Product QTY:", Product_quantity);
 
 
-        // $.ajax({
-        //     url: "/update-cart",
-        //     data: {
-        //         "id": product_id,
-        //         "qty":Product_quantity
-        //     },
-        //     dataType: "json",
-        //     beforeSend:function(){
-        //         this_val.hide()
-        //     },
-        //     success:function(response){
-        //         this_val.show()
-        //         $(".cart-items-count").text(response.totalcartitems)
-        //         $("#cart-list").html(response.data)
-        //     }
-        // })
+        $.ajax({
+            url: "/update-cart",
+            data: {
+                "id": product_id,
+                "qty":Product_quantity
+            },
+            dataType: "json",
+            beforeSend:function(){
+                this_val.hide()
+            },
+            success:function(response){
+                this_val.show()
+                $(".cart-items-count").text(response.totalcartitems)
+                $("#cart-list").html(response.data)
+            }
+        })
     })
 })
