@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from core import views
 
 
@@ -43,6 +43,8 @@ urlpatterns = [
     path("update-cart/", views.update_cart, name="update-cart"),
     #checkout 
     path("checkout/", views.checkout_view, name="checkout"),
+    #paypal URL
+    path('paypal/', include('paypal.standard.ipn.urls')),
 
 
 
