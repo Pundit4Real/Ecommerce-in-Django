@@ -249,6 +249,31 @@ $(document).ready(function(){
                     $(".button"+id).hide()
                 }
             }
+         })
     })
-    })
+
+    //Adding to Wishlist
+    $(document).on("click",".add-to-wishlist", function(){
+        let product_id = $(this).attr("data-product-item")
+        let this_val = $(this)
+
+        console.log("product id", product_id);
+
+        $.ajax({
+            url: "/add-to-wishlist",
+            data: {
+                "id":product_id
+            },
+            dataType:"json",
+            beforeSend: function(){
+                console.log("Adding to wishlist")
+            },
+            success: function(response){
+                this_val.html("✔")
+                if (response.bool == true){
+                    console.log("added to wishlist");
+                }
+            }
+        });
+    });
 })

@@ -10,7 +10,7 @@
                     <section class="home-slider position-relative mb-30">
                         <div class="home-slide-cover mt-30">
                             <div class="hero-slider-1 style-4 dot-style-1 dot-style-1-position-1">
-                                <div class="single-hero-slider single-animation-wrap" style="background-image: url({% static 'assets/imgs/slider/slider-1.png' %})">
+                                <div class="single-hero-slider single-animation-wrap" style="background-image: url(assets/imgs/slider/slider-1.png);">
                                     <div class="slider-content">
                                         <h1 class="display-2 mb-40">
                                             Don’t miss amazing<br>
@@ -23,7 +23,7 @@
                                         </form>
                                     </div>
                                 </div>
-                                <div class="single-hero-slider single-animation-wrap" style="background-image: url({% static 'assets/imgs/slider/slider-2.png' %})">
+                                <div class="single-hero-slider single-animation-wrap" style="background-image: url( 'assets/imgs/slider/slider-2.png' )">
                                     <div class="slider-content">
                                         <h1 class="display-2 mb-40">
                                             Fresh Vegetables<br>
@@ -118,7 +118,10 @@
                                                         <input type="hidden" class="product-id-{{ p.id }}" value = "{{ p.id }}">
                                                         <input type="hidden" class="product-title-{{ p.id }}" value = "{{ p.title }}">
 
-                                                        <button class='add add-to-cart-btn' data-index = "{{ p.id }}" style="border: none;" id="add-to-cart-btn" ><i class="fi-rs-shopping-cart mr-5"></i>Add </button>
+                                                        <div class="d-flex">
+                                                            <button class='add add-to-cart-btn' data-index = "{{ p.id }}" style="border: none;" id="add-to-cart-btn" ><i class="fi-rs-shopping-cart mr-5"></i>Add </button>
+                                                            <button style="border: none; background: none;" class="add-to-wishlist" data-product-item="{{p.id}}"><i class="fi-rs-heart" style="fill:aqua"></i></button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
