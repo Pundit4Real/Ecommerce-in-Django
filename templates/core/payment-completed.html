@@ -53,69 +53,39 @@
                                     <table class="table table-striped invoice-table">
                                         <thead class="bg-active">
                                             <tr>
-                                                <th>Item Item</th>
+                                                <th>Title</th>
                                                 <th class="text-center">Unit Price</th>
                                                 <th class="text-center">Quantity</th>
                                                 <th class="text-right">Amount</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {% for product_id, item in cart_data.items  %}
                                             <tr>
                                                 <td>
                                                     <div class="item-desc-1">
-                                                        <span>Field Roast Chao Cheese Creamy Original</span>
-                                                        <small>SKU: FWM15VKT</small>
+                                                        <span>{{item.title}}</span>
+                                                        <!-- <small>SKU: FWM15VKT</small> -->
                                                     </div>
                                                 </td>
-                                                <td class="text-center">$10.99</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-right">$10.99</td>
+                                                <td class="text-center">${{item.price}}</td>
+                                                <td class="text-center">{{item.qty}}</td>
+                                                <td class="text-right">${% widthratio item.price 1 item.qty %}.00</td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="item-desc-1">
-                                                        <span>Blue Diamond Almonds Lightly Salted</span>
-                                                        <small>SKU: FWM15VKT</small>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">$20.00</td>
-                                                <td class="text-center">3</td>
-                                                <td class="text-right">$60.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="item-desc-1">
-                                                        <span>Fresh Organic Mustard Leaves Bell Pepper</span>
-                                                        <small>SKU: KVM15VK</small>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">$640.00</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-right">$640.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div class="item-desc-1">
-                                                        <span>All Natural Italian-Style Chicken Meatballs</span>
-                                                        <small>SKU: 98HFG</small>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">$240.00</td>
-                                                <td class="text-center">1</td>
-                                                <td class="text-right">$240.00</td>
-                                            </tr>
+                                            {% endfor %}
                                             <tr>
                                                 <td colspan="3" class="text-end f-w-600">SubTotal</td>
-                                                <td class="text-right">$1710.99</td>
+                                                <td class="text-right">${{cart_total_amount}}</td>
                                             </tr>
-                                            <tr>
+                                            <!-- <tr>
                                                 <td colspan="3" class="text-end f-w-600">Tax</td>
                                                 <td class="text-right">$85.99</td>
-                                            </tr>
+                                            </tr> -->
                                             <tr>
                                                 <td colspan="3" class="text-end f-w-600">Grand Total</td>
-                                                <td class="text-right f-w-600">$1795.99</td>
+                                                <td class="text-right f-w-600">${{cart_total_amount}}</td>
                                             </tr>
+                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -125,20 +95,19 @@
                                     <div class="col-md-6">
                                         <h6 class="mb-15">Invoice Infor</h6>
                                         <p class="font-sm">
-                                            <strong>Issue date:</strong> 20 march, 2022<br>
-                                            <strong>Invoice To:</strong> NestMart Inc<br>
-                                            <strong>Swift Code:</strong> BFTV VNVXS
+                                            <!-- <strong>Issue date:</strong> 20 march, 2022<br> -->
+                                            <strong>Invoice To:</strong> {{request.user|title}}<br>
                                         </p>
                                     </div>
                                     <div class="col-md-6 text-end">
                                         <h6 class="mb-15">Total Amount</h6>
-                                        <h3 class="mt-0 mb-0 text-brand">$1795.99</h3>
+                                        <h3 class="mt-0 mb-0 text-brand">${{cart_total_amount}}</h3>
                                         <p class="mb-0 text-muted">Taxes Included</p>
                                     </div>
                                 </div>
                                 <div class="row text-center">
                                     <div class="hr mt-30 mb-30"></div>
-                                    <p class="mb-0 text-muted"><strong>Note:</strong>This is computer generated receipt and does not require physical signature.</p>
+                                    <p class="mb-0 text-muted"><strong>Hey {{ request.user|title }},</strong> Thanks for shopping with us !!</p>
                                 </div>
                             </div>
                         </div>
