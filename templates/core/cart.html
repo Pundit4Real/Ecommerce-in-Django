@@ -52,10 +52,9 @@
                                     <td class="image product-thumbnail pt-40"><img src="{{ item.image }}" alt="#"></td>
                                     <td class="product-des product-name">
                                         <h6 class="mb-5"><a class='product-name mb-10 text-heading' href="{% url 'core:product-detail' item.pid %}">{{ item.title }}</a></h6>
-                                        
                                     </td>
                                     <td class="price" data-title="Price">
-                                        <h4 class="text-body">{{ item.price|floatformat:2 }} </h4>
+                                        <h4 class="text-body">${{ item.price|floatformat:2 }} </h4>
                                     </td>
                                     <td class="text-center detail-info" data-title="Stock">
                                             <div class="mr-15">
@@ -373,7 +372,7 @@
                                             <h6 class="text-muted">Subtotal</h6>
                                         </td>
                                         <td class="cart_total_amount">
-                                            <h4 class="text-brand text-end">{{cart_total_amount|floatformat:2}}</h4>
+                                            <h4 class="text-brand text-end">${{cart_total_amount|floatformat:2}}</h4>
                                         </td>
                                     </tr>
                                     <tr>
@@ -393,15 +392,18 @@
                                             <h6 class="text-muted">Total</h6>
                                         </td>
                                         <td class="cart_total_amount">
-                                            <h4 class="text-brand text-end">{{cart_total_amount|floatformat:2}}</h4>
+                                            <h4 class="text-brand text-end">${{cart_total_amount|floatformat:2}}</h4>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                        {% if totalcartitems %}
-                        <a href="{% url 'core:checkout' %}" class="btn mb-20 w-100">Proceed To CheckOut<i class="fi-rs-sign-out ml-15"></i></a>
-                        {% endif %}                    </div>
+                        <div>
+                            {% if totalcartitems %}
+                                <a href="{% url 'core:checkout' %}" class="btn mb-20 w-100">Proceed To CheckOut<i class="fi-rs-sign-out ml-15"></i></a>
+                            {% endif %} 
+                        <div>
+                    </div>
                 </div>
             </div>
         </div>

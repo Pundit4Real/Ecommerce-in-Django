@@ -339,7 +339,6 @@ def payment_completed_view(request):
     # }
     return render(request, "core/payment-completed.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount})
 
-
 @login_required
 def payment_failed_view(request):
     return render(request,'core/payment-failed.html')
