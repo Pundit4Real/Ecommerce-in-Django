@@ -159,10 +159,11 @@
                                                         <br>
                                                         {% if a.status %}
                                                             <i data-address-id="{{a.id}}" class="fa fa-check-circle text-success check{{a.id}} check"></i>
-                                                            <button data-address-id="{{a.id}}" style="display: none;" class="btn make-default-address button{{a.id}} action-btn">Make Default</button>
+                                                            <button data-address-id="{{a.id}}" style="display: none;" class="btn make-default-address button{{ a.id }} action_btn">Make Default</button>
+
                                                         {% else %}
-                                                            <i data-address-id="{{a.id}}" style="display: none;" class="fa fa-check-circle text-success check check{{a.id}}"></i>
-                                                            <button data-address-id="{{a.id}}"  class="btn make-default-address button{{a.id}} action-btn">Make Default</button>
+                                                            <i data-address-id="{{ a.id }}" style="display: none;" class="fa fa-check-circle text-success check check{{ a.id }}"></i>
+                                                            <button data-address-id="{{ a.id }}"  class="btn make-default-address button{{ a.id }} action_btn">Make Default</button>
                                                         {% endif %}
                                                     </div>
                                                 </div>
