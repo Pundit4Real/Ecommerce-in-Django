@@ -327,7 +327,7 @@ def payment_completed_view(request):
     if 'cart_data_obj' in request.session:
         for p_id, item in request.session['cart_data_obj'].items():
             cart_total_amount += int(item['qty']) * float(item['price'])
-            
+
     return render(request, "core/payment-completed.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount })
 
 
@@ -335,3 +335,20 @@ def payment_completed_view(request):
 @login_required
 def payment_failed_view(request):
     return render(request,'core/payment-failed.html')
+
+@login_required
+def customer_dashboard(request):
+    orders = CartOrder.objects.filter(user=request.user).order_by('-id')
+    context = {
+        "orders": orders,
+    }
+    return render(request, 'core/dashboard.html',context)
+
+def order_detail(request,id):
+    order = CartOrder.objects.get(user=request.user,id=id)
+    order_items = CartOrderItems.objects.filter(order=order)
+
+    context = {
+        "order_items": order_items,
+    }
+    return render(request, 'core/order-detail.html',context)

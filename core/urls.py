@@ -47,8 +47,13 @@ urlpatterns = [
     path('paypal/', include('paypal.standard.ipn.urls')),
     #payment Successful
     path('payment-completed/', views.payment_completed_view, name="payment-completed"),
-
+    #Payment Failed
     path('payment-failed/', views.payment_failed_view, name="payment-failed"),
+
+    #Dashboard URL
+    path('dashboard/', views.customer_dashboard, name="dashboard"),
+    #Order Detail
+    path('dashboard/order/<int:id>', views.order_detail, name="order-detail"),
 
 
 
