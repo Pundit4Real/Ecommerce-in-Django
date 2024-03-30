@@ -224,4 +224,31 @@ $(document).ready(function(){
             }
         })
     })
+
+    // Making Default Addresses
+    $(document).on("click", ".make-default-address", function() {
+        let id = $(this).attr("data-address-id")
+        let this_val = $(this)
+
+        console.log("id", id);
+        console.log("element:", this_val);
+
+        $.ajax({
+            url: "/make-default-address",
+            data: {
+                "id":id
+            },
+            dataType:"json",
+            success: function(response){
+                console.log("address made default")
+                if(response.boolean == true){
+                    $(".check").hide()
+                    $(".action_btn").show()
+
+                    $(".check"+id).show()
+                    $(".button"+id).hide()
+                }
+            }
+    })
+    })
 })
