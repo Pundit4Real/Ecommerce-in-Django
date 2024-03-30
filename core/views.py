@@ -417,3 +417,18 @@ def add_to_wishlist(request):
             "bool": True
         }
     return JsonResponse(context)
+
+
+def remove_from_wishlist(request):
+    pid = request.GET['id']
+    wishlist = Wishlist_model.objects.filter(user=request.user)
+
+    product = Wishlist_model.objects.get(id=pid)
+    product.objects.delete()
+
+    context = {
+        "bool":True,
+        "wishlist":wishlist
+    }
+    data = render_to_string("core/async/wishlist-list.html", context)
+    return JsonResponse({"data":data, "w":wishlist})
