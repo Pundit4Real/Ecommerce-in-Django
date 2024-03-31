@@ -248,29 +248,35 @@
     </main>
 
     <script>
+        // Fetch your dynamic data from the backend using AJAX or any other method
+        // For demonstration purposes, let's assume you have the following data
+        const labels = {{ month|safe }};
+        const dataValues = {{ total_orders|safe }};
+    
+        // Select the canvas element by its id
         const ctx = document.getElementById('myChart');
-      
+
+        // Create a new Chart instance with dynamic data
         new Chart(ctx, {
-          type: 'line',
-          data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-            // bordercolor: 'rgba(255,99,132)',
-            // backgroundColor: 'rgba(255,99,132)',
-            datasets: [{
-              label: 'My First dataset',
-              data: [12, 19, 3, 5, 2, 3],
-              borderWidth: 1
-            }]
-          },
-          options: {
-            scales: {
-              y: {
-                beginAtZero: true
-              }
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Orders',
+                    data: dataValues,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        min: 0,
+                    }
+                }
             }
-          }
         });
-      </script>
+    </script>
+    
       
     
       
