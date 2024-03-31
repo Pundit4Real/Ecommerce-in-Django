@@ -2,7 +2,9 @@ from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse,get_object_or_404,redirect
 from django.db.models import Count,Avg
 from taggit.models import Tag
-from core.models import ContactUs, Product,Vendor, Category, CartOrder,CartOrderItems, ProductImages,ProductReview, Wishlist_model,Address
+from core.models import (ContactUs, Product,Vendor, Category, CartOrder,CartOrderItems,
+                          ProductImages,ProductReview, Wishlist_model,Address)
+from userauths.models import Profile
 from core.forms import ProductReviewForm
 from django.template.loader import render_to_string
 from django.contrib import messages
@@ -353,6 +355,8 @@ def customer_dashboard(request):
     orders_list = CartOrder.objects.filter(user=request.user).order_by('-id')
     address = Address.objects.filter(user=request.user)
 
+    profile = Profile.objects.get(user=request.user)
+
     orders =CartOrder.objects.annotate(month=ExtractMonth("order_date")).values("month").annotate(count=Count("id")).values("month","count")
     month = []
     total_orders = []
@@ -376,8 +380,9 @@ def customer_dashboard(request):
         return redirect("core:dashboard")
 
     context = {
-        "orders_list": orders_list,
+        "profile":profile,
         "address":address,
+        "orders_list": orders_list,
         "orders":orders,
         "month":month,
         "total_orders":total_orders
