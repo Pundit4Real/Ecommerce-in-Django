@@ -53,6 +53,13 @@
                                                     manage your <a href="#">shipping and billing addresses</a> and <a href="#">edit your password and account details.</a>
                                                 </p>
                                             </div>
+                                            <!-- <div class="mt-4">
+                                                <p>{{  month }}</p>
+                                                <p>{{  total_orders }}</p>
+                                            </div> -->
+                                        </div>
+                                        <div>
+                                            <canvas style="height: 50px;" id="myChart"></canvas>
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
@@ -74,7 +81,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            {% for o in orders  %}
+                                                            {% for o in orders_list  %}
                                                             <tr>
                                                                 <td>INVOICE_NO-{{o.id}}</td>
 
@@ -239,4 +246,32 @@
             </div>
         </div>
     </main>
+
+    <script>
+        const ctx = document.getElementById('myChart');
+      
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+            // bordercolor: 'rgba(255,99,132)',
+            // backgroundColor: 'rgba(255,99,132)',
+            datasets: [{
+              label: 'My First dataset',
+              data: [12, 19, 3, 5, 2, 3],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      </script>
+      
+    
+      
  {% endblock content %}
