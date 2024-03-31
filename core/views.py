@@ -449,3 +449,21 @@ def remove_from_wishlist(request):
     wishlist_json = serializers.serialize('json', wishlist)
     t = render_to_string("core/async/wishlist-list.html", context)
     return JsonResponse({"data":t, "w":wishlist_json})
+
+
+#Other Pages
+
+def contact(request):
+    return render(request,"core/contact.html")
+
+def about_us(request):
+    return render(request,"core/about-us.html")
+
+def purchase_guide(request):
+    return render(request,"core/purchase-guide.html")
+
+def privacy_policy(request):
+    return render(request,"core/privacy-policy.html")
+
+def terms_of_service(request):
+    return render(request,"core/terms-of-service.html")
