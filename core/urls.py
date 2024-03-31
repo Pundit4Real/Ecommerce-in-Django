@@ -64,6 +64,14 @@ urlpatterns = [
     path('remove-from-wishlist/', views.remove_from_wishlist, name="remove-from-wishlist"),
     #Contact Us Url
     path('contact/', views.contact, name="contact"),
+    path('ajax-contact-form/', views.ajax_contact, name="ajax-contact-form"),
+
+    path('about-us/', views.about_us, name="about-us"),
+    path('purchase-guide/', views.purchase_guide, name="purchase-guide"),
+    path('privacy-policy/', views.privacy_policy, name="privacy-policy"),
+    path('terms-of-service/', views.terms_of_service, name="terms-of-service"),
+
+
 
 
 

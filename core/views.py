@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse,get_object_or_404,redirect
 from django.db.models import Count,Avg
 from taggit.models import Tag
-from core.models import Product,Vendor, Category, CartOrder,CartOrderItems, ProductImages,ProductReview, Wishlist_model,Address
+from core.models import ContactUs, Product,Vendor, Category, CartOrder,CartOrderItems, ProductImages,ProductReview, Wishlist_model,Address
 from core.forms import ProductReviewForm
 from django.template.loader import render_to_string
 from django.contrib import messages
@@ -455,6 +455,28 @@ def remove_from_wishlist(request):
 
 def contact(request):
     return render(request,"core/contact.html")
+
+def ajax_contact(request):
+    full_name = request.GET['full_name']
+    email = request.GET['email']
+    phone = request.GET['phone']
+    subject = request.GET['subject']
+    message = request.GET['message']
+
+
+    contact = ContactUs.objects.create(
+        full_name=full_name,
+        email=email,
+        phone=phone,
+        subject=subject,
+        message=message
+    )
+
+    data = {
+        "bool":True,
+        "message":"Message Sent Successfully"
+    }
+    return JsonResponse({"data":data})
 
 def about_us(request):
     return render(request,"core/about-us.html")
