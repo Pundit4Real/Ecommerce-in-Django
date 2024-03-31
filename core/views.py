@@ -6,6 +6,7 @@ from core.models import Product,Vendor, Category, CartOrder,CartOrderItems, Prod
 from core.forms import ProductReviewForm
 from django.template.loader import render_to_string
 from django.contrib import messages
+from django.core import serializers
 from django.contrib.auth.decorators import login_required
 
 from django.urls import reverse
@@ -422,13 +423,13 @@ def add_to_wishlist(request):
 def remove_from_wishlist(request):
     pid = request.GET['id']
     wishlist = Wishlist_model.objects.filter(user=request.user)
-
-    product = Wishlist_model.objects.get(id=pid)
-    product.objects.delete()
+    wishlist_d = Wishlist_model.objects.get(id=pid)
+    delete_product = wishlist_d.delete()
 
     context = {
         "bool":True,
-        "wishlist":wishlist
+        "w":wishlist
     }
-    data = render_to_string("core/async/wishlist-list.html", context)
-    return JsonResponse({"data":data, "w":wishlist})
+    wishlist_json = serializers.serialize('json', wishlist)
+    t = render_to_string("core/async/wishlist-list.html", context)
+    return JsonResponse({"data":t, "w":wishlist_json})
