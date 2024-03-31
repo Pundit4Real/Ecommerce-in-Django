@@ -52,7 +52,11 @@
                                             </div>
                                             <div class="card-body mb-2" style="display: flex; align-items: center; gap: 15px;margin-top: 0;">
                                                 <div>
+                                                    {% if profile.image %}
                                                     <span><img src="{{profile.image.url}}" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;" alt=""></span>
+                                                    {%else%}
+                                                    <span><img src="{% static 'assets/imgs/profile.jpg' %}" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;" alt=""></span>
+                                                    {% endif %}
                                                 </div>
 
                                                 <div>
@@ -69,7 +73,7 @@
                                                         </div>
                                                     {% endif %}
                                                     <div class="p-4">
-                                                        <button class="btn btn-success">Edit Profile</button>
+                                                        <a href="{% url 'userauths:profile-update' %}" class="btn btn-success">Edit Profile</a>
                                                     </div>
                                                 </div>
                                             </div>
