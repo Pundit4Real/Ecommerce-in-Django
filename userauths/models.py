@@ -25,7 +25,8 @@ class Profile(models.Model):
     verified = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.full_name
+       return f"{self.user.username} - {self.full_name}"
+     
 
 
 def create_user_profile(sender, instance, created, **kwargs):
