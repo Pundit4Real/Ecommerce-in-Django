@@ -73,7 +73,7 @@
                             <div class="product-cart-wrap mb-30">
                                 <div class="product-img-action-wrap">
                                     <div class="product-img product-img-zoom">
-                                        <a href="{% url 'core:category-product-list' p.pid %}">
+                                        <a href="#">
                                             {% comment %} quarying the image dynamically from the database{% endcomment %}
                                             <img class="default-img" src="{{p.image.url}}" alt="">
                                             <img class="hover-img" src="{{p.image.url}}" alt="">
@@ -100,7 +100,7 @@
                                         <span class="font-small ml-5 text-muted"> {{ p.ProductReview.rating }}</span>
                                     </div>
                                     <div>
-                                        <span class="font-small text-muted">By <a href='vendor-details-1.html'>{{p.vendor}}</a></span>
+                                        <span class="font-small text-muted">By <a href="'vendor-details-1.html'">{{p.vendor}}</a></span>
                                     </div>
                                     <div class="product-card-bottom">
                                         <div class="product-price">
