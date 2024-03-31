@@ -63,3 +63,7 @@ def logout_view(request):
     logout(request)
     messages.warning(request, "You logged out.")
     return redirect("userauths:sign-in")
+
+
+def profile_update(request):
+    return render(request, 'userauths/profile-edit.html')
