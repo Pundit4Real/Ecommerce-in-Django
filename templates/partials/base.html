@@ -5,7 +5,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Nest - Multipurpose eCommerce HTML Template</title>
+    <title>Pundit-Ecom</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -128,7 +128,7 @@
                     <div class="col-xl-3 col-lg-4">
                         <div class="header-info">
                             <ul>
-                                <li><a href="page-about.htlm">About Us</a></li>
+                                <li><a href="{% url "core:about-us" %}">About Us</a></li>
                                 <li><a href="{% url "core:dashboard" %}">My Account</a></li>
                                 <li><a href="{% url "core:wishlist" %}">Wishlist</a></li>
                                 <li><a href="shop-order.html">Order Tracking</a></li>
@@ -342,15 +342,7 @@
                                 <ul>
                                     <li class="hot-deals"><img src="{% static 'assets/imgs/theme/icons/icon-hot.svg' %}" alt="hot deals"><a href='shop-grid-right.html'>Deals</a></li>
                                     <li>
-                                        <a class='active' href='index.htm'>Home <i class="fi-rs-angle-down"></i></a>
-                                        <ul class="sub-menu">
-                                            <li><a href='index.htm'>Home 1</a></li>
-                                            <li><a href='index-2.html'>Home 2</a></li>
-                                            <li><a href='index-3.html'>Home 3</a></li>
-                                            <li><a href='index-4.html'>Home 4</a></li>
-                                            <li><a href='index-5.html'>Home 5</a></li>
-                                            <li><a href='index-6.html'>Home 6</a></li>
-                                        </ul>
+                                        <a class='active' href="{% url 'core:index' %}">Home </i></a>
                                     </li>
                                    
                                     <li>
@@ -441,7 +433,7 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <a href='blog-category-grid.html'>Blog <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
                                             <li><a href='blog-category-grid.html'>Blog Category Grid</a></li>
@@ -457,7 +449,7 @@
                                                 </ul>
                                             </li>
                                         </ul>
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <a href="#">Pages <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
