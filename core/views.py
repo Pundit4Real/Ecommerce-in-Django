@@ -404,7 +404,7 @@ def make_address_default(request):
     Address.objects.filter(id=id).update(status=True)
     return JsonResponse({"boolean":True})
 
-
+@login_required
 def wishlist_view(request):
 
     wishlist = Wishlist_model.objects.all()
