@@ -188,23 +188,18 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo logo-width-1">
-                        <a href='index.htm'><img src="{% static 'assets/imgs/theme/logo.svg' %}" alt="logo"></a>
+                        <a href="{% url 'core:index' %}"><img src="{% static 'assets/imgs/theme/logo.svg' %}" alt="logo"></a>
                     </div>
                     <div class="header-right">
                         <div class="search-style-2">
                             <form action="{% url 'core:search' %}" method="GET">
                                 <select class="select-active">
                                     <option>All Categories</option>
-                                    <option>Milks and Dairies</option>
-                                    <option>Wines & Alcohol</option>
-                                    <option>Clothing & Beauty</option>
-                                    <option>Pet Foods & Toy</option>
-                                    <option>Fast food</option>
-                                    <option>Baking material</option>
-                                    <option>Vegetables</option>
-                                    <option>Fresh Seafood</option>
-                                    <option>Noodles & Rice</option>
-                                    <option>Ice cream</option>
+                                    {% for c in categories %}
+                                      
+                                    <option>{{c.title}}</option>
+
+                                    {% endfor %}
                                 </select>
                                 <input type="text" placeholder="Search for items..." name="q">
                                 <button class="fas fa-search" type="submit"></button>
@@ -233,13 +228,13 @@
                                         </select>
                                     </form>
                                 </div>
-                                <div class="header-action-icon-2">
+                                <!-- <div class="header-action-icon-2">
                                     <a href='shop-compare.html'>
                                         <img class="svgInject" alt="Nest" src="{% static 'assets/imgs/theme/icons/icon-compare.svg' %}">
                                         <span class="pro-count blue">3</span>
                                     </a>
                                     <a href='shop-compare.html'><span class="lable ml-0">Compare</span></a>
-                                </div>
+                                </div> -->
                                 <div class="header-action-icon-2">
                                     <a href="{% url 'core:wishlist' %}">
                                         <img class="svgInject" alt="Nest" src="{% static 'assets/imgs/theme/icons/icon-heart.svg' %}">
@@ -270,10 +265,10 @@
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                                         <ul>
                                             <li><a href="{% url 'core:dashboard' %}"><i class="fi fi-rs-user mr-10"></i>My Account</a></li>
-                                            <li><a href='page-account.html'><i class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a></li>
-                                            <li><a href='page-account.html'><i class="fi fi-rs-label mr-10"></i>My Voucher</a></li>
+                                            <li><a href='#'><i class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a></li>
+                                            <li><a href='#'><i class="fi fi-rs-label mr-10"></i>My Voucher</a></li>
                                             <li><a href="{% url "core:wishlist" %}"><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a></li>
-                                            <li><a href='page-account.html'><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a></li>
+                                            <li><a href="{% url 'core:dashboard' %}"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a></li>
 
                                             {% if request.user.is_authenticated %}
                                             <li><a href="{% url 'userauths:sign-out' %}"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a></li>
@@ -293,7 +288,7 @@
             <div class="container">
                 <div class="header-wrap header-space-between position-relative">
                     <div class="logo logo-width-1 d-block d-lg-none">
-                        <a href='index.htm'><img src="{% static 'assets/imgs/theme/logo.svg' %}" alt="logo"></a>
+                        <a href="{% url 'core:index' %}"><img src="{% static 'assets/imgs/theme/logo.svg' %}" alt="logo"></a>
                     </div>
                     <div class="header-nav d-none d-lg-flex">
                         <div class="main-categori-wrap d-none d-lg-block">
@@ -314,7 +309,7 @@
                                     </ul>
                                   
                                 </div>
-                                <div class="more_slide_open" style="display: none">
+                                <!-- <div class="more_slide_open" style="display: none">
                                     <div class="d-flex categori-dropdown-inner">
                                         <ul>
                                             <li>
@@ -333,20 +328,20 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
-                                <div class="more_categories"><span class="icon"></span> <span class="heading-sm-1">Show more...</span></div>
+                                </div> -->
+                                <!-- <div class="more_categories"><span class="icon"></span> <span class="heading-sm-1">Show more...</span></div> -->
                             </div>
                         </div>
                         <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">
                             <nav>
                                 <ul>
-                                    <li class="hot-deals"><img src="{% static 'assets/imgs/theme/icons/icon-hot.svg' %}" alt="hot deals"><a href='shop-grid-right.html'>Deals</a></li>
+                                    <!-- <li class="hot-deals"><img src="{% static 'assets/imgs/theme/icons/icon-hot.svg' %}" alt="hot deals"><a href='shop-grid-right.html'>Deals</a></li> -->
                                     <li>
                                         <a class='active' href="{% url 'core:index' %}">Home </i></a>
                                     </li>
                                    
                                     <li>
-                                        <a href='shop-grid-right.html'>Category <i class="fi-rs-angle-down"></i></a>
+                                        <a href="{% url 'core:category-list' %}">Category <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
                                             {% for c in  categories %}
                                            <li> <a href="{% url 'core:category-product-list' c.cid %}">{{c.title}}</a></li>
@@ -453,21 +448,21 @@
                                     <li>
                                         <a href="#">Pages <i class="fi-rs-angle-down"></i></a>
                                         <ul class="sub-menu">
-                                            <li><a href='page-about.html'>About Us</a></li>
-                                            <li><a href='page-contact.html'>Contact</a></li>
-                                            <li><a href='page-account.html'>My Account</a></li>
-                                            <li><a href='page-login.html'>Login</a></li>
-                                            <li><a href='page-register.html'>Register</a></li>
-                                            <li><a href='page-forgot-password.html'>Forgot password</a></li>
-                                            <li><a href='page-reset-password.html'>Reset password</a></li>
-                                            <li><a href='page-purchase-guide.html'>Purchase Guide</a></li>
-                                            <li><a href='page-privacy-policy.html'>Privacy Policy</a></li>
-                                            <li><a href='page-terms.html'>Terms of Service</a></li>
-                                            <li><a href='page-404.html'>404 Page</a></li>
+                                            <li><a href="{% url 'core:about-us' %}">About Us</a></li>
+                                            <li><a href="{% url 'core:contact' %}">Contact</a></li>
+                                            <li><a href="{% url 'core:dashboard' %}">My Account</a></li>
+                                            <li><a href="{% url 'userauths:sign-in' %}">Login</a></li>
+                                            <li><a href="{% url 'userauths:sign-up' %}">Register</a></li>
+                                            <li><a href='#'>Forgot password</a></li>
+                                            <li><a href='#'>Reset password</a></li>
+                                            <li><a href="{% url 'core:purchase-guide' %}">Purchase Guide</a></li>
+                                            <li><a href="{% url 'core:privacy-policy' %}">Privacy Policy</a></li>
+                                            <li><a href="{% url 'core:terms-of-service' %}">Terms of Service</a></li>
+                                            <!-- <li><a href='page-404.html'>404 Page</a></li> -->
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href='page-contact.html'>Contact</a>
+                                        <a href="{% url 'core:contact' %}">Contact</a>
                                     </li>
                                 </ul>
                             </nav>
@@ -475,7 +470,7 @@
                     </div>
                     <div class="hotline d-none d-lg-flex">
                         <img src="{% static 'assets/imgs/theme/icons/icon-headphone.svg' %}" alt="hotline">
-                        <p>1900 - 888<span>24/7 Support Center</span></p>
+                        <p>+233 598193277<span>24/7 Support Center</span></p>
                     </div>
                     <div class="header-action-icon-2 d-block d-lg-none">
                         <div class="burger-icon burger-icon-white">
@@ -632,7 +627,7 @@
                     <div class="col">
                         <div class="widget-about font-md mb-md-3 mb-lg-3 mb-xl-0">
                             <div class="logo mb-30">
-                                <a class='mb-15' href='index.htm'><img src="{% static 'assets/imgs/theme/logo.svg' %}" alt="logo"></a>
+                                <a class='mb-15' href="{% url 'core:index' %}"><img src="{% static 'assets/imgs/theme/logo.svg' %}" alt="logo"></a>
                                 <p class="font-lg text-heading">Awesome grocery store website template</p>
                             </div>
                             <ul class="contact-infor">
@@ -710,7 +705,7 @@
                     <div class="footer-bottom"></div>
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-6">
-                    <p class="font-sm mb-0">&copy; 2022, <strong class="text-brand">Nest</strong> - HTML Ecommerce Template <br>All rights reserved</p>
+                    <p class="font-sm mb-0">&copy; 2024, <strong class="text-brand">Nest</strong> - HTML Ecommerce Template <br>All rights reserved</p>
                 </div>
                 <div class="col-xl-4 col-lg-6 text-center d-none d-xl-block">
                     <div class="hotline d-lg-inline-flex mr-30">
@@ -719,7 +714,7 @@
                     </div>
                     <div class="hotline d-lg-inline-flex">
                         <img src="{% static 'assets/imgs/theme/icons/phone-call.svg' %}" alt="hotline">
-                        <p>1900 - 8888<span>24/7 Support Center</span></p>
+                        <p>+233 598193277<span>24/7 Support Center</span></p>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-6 col-md-6 text-end d-none d-md-block">
