@@ -200,12 +200,12 @@
                                         </a>
                                     </div>
                                     <div class="product-action-1">
-                                        <a aria-label='Add To Wishlist' class='action-btn' href='shop-wishlist.html'><i class="fi-rs-heart"></i></a>
-                                        <a aria-label='Compare' class='action-btn' href='shop-compare.html'><i class="fi-rs-shuffle"></i></a>
-                                        <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+                                        <button style="border: none; background: none;" class="add-to-wishlist" data-product-item="{{p.id}}"><i class="fi-rs-heart" style="fill:aqua"></i></button>
+                                        <!-- <a aria-label='Compare' class='action-btn' href='#'><i class="fi-rs-shuffle"></i></a> -->
+                                        <a href = "{% url 'core:product-detail' p.pid %}" class="action-btn"><i class="fi-rs-eye"></i></a>
                                     </div>
                                     <div class="product-badges product-badges-position product-badges-mrg">
-                                        <span class="hot">-{{ p.get_percentage|floatformat:0 }}%</span>
+                                        <span class="hot">{{ p.get_percentage|floatformat:0 }}%</span>
                                     </div>
                                 </div>
                                 <div class="product-content-wrap">

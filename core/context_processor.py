@@ -11,7 +11,7 @@ def default(request):
     try:
         wishlist = Wishlist_model.objects.filter(user=request.user)
     except:
-        messages.warning(request, "You need to login before accessing your wishlist.")
+        # messages.warning(request, "You need to login before accessing your wishlist.")
         wishlist = 0
 
     try:

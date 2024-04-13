@@ -255,7 +255,6 @@ def delete_item_from_cart(request):
     context = render_to_string("core/async/cart-list.html",{"cart_data":request.session['cart_data_obj'], 'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount }) 
     return JsonResponse({"data":context, 'totalcartitems':len(request.session['cart_data_obj'])})
 
-
 #updating the cart items functions
 def update_cart(request):
     product_id = str(request.GET['id'])
@@ -406,13 +405,16 @@ def make_address_default(request):
 
 @login_required
 def wishlist_view(request):
+    wishlist = Wishlist_model.objects.filter(user=request.user)
 
-    wishlist = Wishlist_model.objects.all()
+    if not request.user.is_authenticated:
+        messages.warning(request, "You need to log in before accessing your wishlist.")
+        return redirect('login')  # Redirect the user to the login page
 
     context = {
         "w": wishlist 
     }
-    return render(request,"core/wishlist.html", context)
+    return render(request, "core/wishlist.html", context)
 
 @login_required
 def add_to_wishlist(request):

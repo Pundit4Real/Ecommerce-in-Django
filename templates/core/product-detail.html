@@ -102,8 +102,8 @@
                                                     <input type="hidden" class="product-title-{{ p.id }}" value = "{{ p.title }}">
 
                                                     <button type="submit" class="button button-add-to-cart add-to-cart-btn" data-index="{{ p.id }}" id="add-to-cart-btn"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
-                                                    <a aria-label='Add To Wishlist' class='action-btn hover-up' href='shop-wishlist.html'><i class="fi-rs-heart"></i></a>
-                                                    <a aria-label='Compare' class='action-btn hover-up' href='shop-compare.html'><i class="fi-rs-shuffle"></i></a>
+                                                    <button style="border: none; background: none" class="add-to-wishlist action-btn hover-up" data-product-item="{{p.id}}"><i class="fi-rs-heart" style="fill:aqua"></i></button>
+                                                    <!-- <a aria-label='Compare' class='action-btn hover-up' href='#'><i class="fi-rs-shuffle"></i></a> -->
                                                 </div>
                                             </div>
                                             <div class="font-xs">
@@ -411,9 +411,10 @@
                                                             </a>
                                                         </div>
                                                         <div class="product-action-1">
+                                                            <a href = "{% url 'core:product-detail' p.pid %}" class="action-btn"><i class="fi-rs-eye"></i></a>
                                                             <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                                            <a aria-label='Add To Wishlist' class='action-btn small hover-up' href='shop-wishlist.html' tabindex='0'><i class="fi-rs-heart"></i></a>
-                                                            <a aria-label='Compare' class='action-btn small hover-up' href='shop-compare.html' tabindex='0'><i class="fi-rs-shuffle"></i></a>
+                                                            <button style="border: none; background: none;" class="add-to-wishlist" data-product-item="{{p.id}}"><i class="fi-rs-heart" style="fill:aqua"></i></button>
+                                                            <!-- <a aria-label='Compare' class='action-btn small hover-up' href='#' tabindex='0'><i class="fi-rs-shuffle"></i></a> -->
                                                         </div>
                                                         <div class="product-badges product-badges-position product-badges-mrg">
                                                             <span class="hot">{{p.get_percentage|floatformat:0}}%</span>
