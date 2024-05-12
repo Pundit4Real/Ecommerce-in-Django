@@ -10,7 +10,8 @@ from django.template.loader import render_to_string
 from django.contrib import messages
 from django.core import serializers
 from django.contrib.auth.decorators import login_required
-
+from decimal import Decimal
+import re
 from django.urls import reverse
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
@@ -229,109 +230,153 @@ def add_to_cart(request):
 
 
 def cart_view(request):
-    cart_total_amount = 0
+    cart_total_amount = Decimal('0')
+    
     if 'cart_data_obj' in request.session:
         for p_id, item in request.session['cart_data_obj'].items():
-            cart_total_amount += int(item['qty']) * float(item['price'])
-        return render(request, "core/cart.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount })
+            qty = int(item['qty'])
+            # Remove non-numeric characters from price string and then convert to Decimal
+            price_str = re.sub(r'[^\d.]', '', item['price'])
+            item['total_price'] = Decimal(price_str) * int(item['qty'])
+
+            price = Decimal(price_str)
+            cart_total_amount += qty * price
+        return render(request, "core/cart.html", {
+            "cart_data": request.session['cart_data_obj'],
+            'totalcartitems': len(request.session['cart_data_obj']),
+            'cart_total_amount': cart_total_amount
+        })
     else:
-        messages.warning(request,"Your cart is empty")
-        return render(request,"core/index.html")
+        messages.warning(request, "Your cart is empty")
+        return render(request, "core/index.html")
+
+
     
 #Deleting from cart functions
 def delete_item_from_cart(request):
-    product_id = str(request.GET['id'])
+    # Get the product ID from the request
+    product_id = request.GET.get('id')
+
+    # Check if the cart data exists in the session
     if 'cart_data_obj' in request.session:
-        if product_id in request.session['cart_data_obj']:
-            cart_data = request.session['cart_data_obj']
-            del request.session['cart_data_obj'][product_id]
+        cart_data = request.session['cart_data_obj']
+        
+        # Check if the product exists in the cart data
+        if product_id in cart_data:
+            # Remove the product from the cart data
+            del cart_data[product_id]
             request.session['cart_data_obj'] = cart_data
 
-    cart_total_amount = 0
-    if 'cart_data_obj' in request.session:
-        for p_id, item in request.session['cart_data_obj'].items():
-            cart_total_amount += int(item['qty']) * float(item['price'])
-    
-    context = render_to_string("core/async/cart-list.html",{"cart_data":request.session['cart_data_obj'], 'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount }) 
-    return JsonResponse({"data":context, 'totalcartitems':len(request.session['cart_data_obj'])})
+    # Calculate the total cart amount
+    cart_total_amount = sum(
+        int(item['qty']) * Decimal(re.sub(r'[^\d.]', '', item['price']))
+        for item in cart_data.values()
+    )
+
+    # Render the updated cart HTML asynchronously
+    cart_html = render_to_string("core/async/cart-list.html", {
+        "cart_data": cart_data,
+        "totalcartitems": len(cart_data),
+        "cart_total_amount": cart_total_amount
+    })
+
+    # Return JSON response with updated cart data
+    return JsonResponse({
+        "data": cart_html,
+        "totalcartitems": len(cart_data)
+    })
 
 #updating the cart items functions
 def update_cart(request):
-    product_id = str(request.GET['id'])
-    product_qty = request.GET['qty']
+    # Get the product ID and quantity from the request
+    product_id = request.GET.get('id')
+    product_qty = request.GET.get('qty')
 
     if 'cart_data_obj' in request.session:
-        if product_id in request.session['cart_data_obj']:
-            cart_data = request.session['cart_data_obj']
-            cart_data[str(request.GET['id'])]['qty'] = product_qty
+        cart_data = request.session['cart_data_obj']
+        
+        # Check if the product exists in the cart data
+        if product_id in cart_data:
+            cart_data[product_id]['qty'] = product_qty
             request.session['cart_data_obj'] = cart_data
 
-    cart_total_amount = 0
-    if 'cart_data_obj' in request.session:
-        for p_id, item in request.session['cart_data_obj'].items():
-            cart_total_amount += int(item['qty']) * float(item['price'])
-    
-    context = render_to_string("core/async/cart-list.html",{"cart_data":request.session['cart_data_obj'], 'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount }) 
-    return JsonResponse({"data":context, 'totalcartitems':len(request.session['cart_data_obj'])})
+    # Calculate the total cart amount
+    cart_total_amount = sum(
+        int(item['qty']) * Decimal(re.sub(r'[^\d.]', '', item['price']))
+        for item in cart_data.values()
+    )
+
+    # Render the updated cart HTML asynchronously
+    cart_html = render_to_string("core/async/cart-list.html", {
+        "cart_data": cart_data,
+        "totalcartitems": len(cart_data),
+        "cart_total_amount": cart_total_amount
+    })
+
+    # Return JSON response with updated cart data
+    return JsonResponse({
+        "data": cart_html,
+        "totalcartitems": len(cart_data)
+    })
 
 @login_required
 def checkout_view(request):
-    cart_total_amount = 0
-    total_amount = 0
+    cart_total_amount = Decimal('0')
+    total_amount = Decimal('0')
 
-    #checking if cart_data_obj session exist
     if 'cart_data_obj' in request.session:
-
-    #Getting total amount for paypal amount
         for p_id, item in request.session['cart_data_obj'].items():
-            total_amount += int(item['qty']) * float(item['price'])
+            # Remove non-numeric characters from price string and then convert to Decimal
+            price_str = re.sub(r'[^\d.]', '', item['price'])
+            total_amount += int(item['qty']) * Decimal(price_str)
 
-    #Creating order objects
         order = CartOrder.objects.create(
             user=request.user,
-            price = total_amount
+            price=total_amount
         )
-    #Getting total amount for the cart
+
         for p_id, item in request.session['cart_data_obj'].items():
-            cart_total_amount += int(item['qty']) * float(item['price'])
+            price_str = re.sub(r'[^\d.]', '', item['price'])
+            price = Decimal(price_str)
+            cart_total_amount += int(item['qty']) * price
 
             cart_order_products = CartOrderItems.objects.create(
                 order=order,
-                invoice_no="INVOICE_NO-" + str(order.id), #invoince_no-5
+                invoice_no="INVOICE_NO-" + str(order.id),
                 item=item['title'],
                 image=item['image'],
                 qty=item['qty'],
-                price=item['price'],
-                total=float(item['qty'])* float(item['price'])
+                price=price,
+                total=int(item['qty']) * price
             )
-
 
     host = request.get_host()
     paypal_dict = {
-        'business':settings.PAYPAL_RECEIVER_EMAIL,
-        'amount':cart_total_amount,
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'amount': cart_total_amount,
         'item_name': "Order-Item-No-" + str(order.id),
-        'invoice':'INVOICE_NO-' + str(order.id),
-        'currency_code':"USD",
-        'notify_url':'http://{}{}'.format(host,reverse("core:paypal-ipn")),
-        'return_url':'http://{}{}'.format(host,reverse("core:payment-completed")),
-        'cancelled_url':'http://{}{}'.format(host,reverse("core:payment-failed"))
+        'invoice': 'INVOICE_NO-' + str(order.id),
+        'currency_code': "USD",
+        'notify_url': 'http://{}{}'.format(host, reverse("core:paypal-ipn")),
+        'return_url': 'http://{}{}'.format(host, reverse("core:payment-completed")),
+        'cancelled_url': 'http://{}{}'.format(host, reverse("core:payment-failed"))
     }
 
-    paypal_payment_button = PayPalPaymentsForm(initial= paypal_dict)
-
-    # cart_total_amount = 0
-    # if 'cart_data_obj' in request.session:
-    #     for p_id, item in request.session['cart_data_obj'].items():
-    #         cart_total_amount += int(item['qty']) * float(item['price'])
+    paypal_payment_button = PayPalPaymentsForm(initial=paypal_dict)
 
     try:
         active_address = Address.objects.get(user=request.user, status=True)
-    except:
-        messages.warning(request,"There are multiple addresses, only one address should be activated.")
+    except Address.DoesNotExist:
+        messages.warning(request, "There are multiple addresses, only one address should be activated.")
         active_address = None
-    return render(request, "core/checkout.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount,'paypal_payment_button':paypal_payment_button, "active_address":active_address })
 
+    return render(request, "core/checkout.html", {
+        "cart_data": request.session['cart_data_obj'],
+        'totalcartitems': len(request.session['cart_data_obj']),
+        'cart_total_amount': cart_total_amount,
+        'paypal_payment_button': paypal_payment_button,
+        "active_address": active_address
+    })
 @login_required
 def payment_completed_view(request):
     # products = Product.objects.all()
