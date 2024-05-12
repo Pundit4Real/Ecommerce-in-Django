@@ -304,6 +304,7 @@ def update_cart(request):
     cart_total_amount = sum(
         int(item['qty']) * Decimal(re.sub(r'[^\d.]', '', item['price']))
         for item in cart_data.values()
+
     )
 
     # Render the updated cart HTML asynchronously
@@ -329,6 +330,8 @@ def checkout_view(request):
             # Remove non-numeric characters from price string and then convert to Decimal
             price_str = re.sub(r'[^\d.]', '', item['price'])
             total_amount += int(item['qty']) * Decimal(price_str)
+            item['total_price'] = Decimal(price_str) * int(item['qty'])
+
 
         order = CartOrder.objects.create(
             user=request.user,
@@ -379,15 +382,13 @@ def checkout_view(request):
     })
 @login_required
 def payment_completed_view(request):
-    # products = Product.objects.all()
     cart_total_amount = 0
     if 'cart_data_obj' in request.session:
         for p_id, item in request.session['cart_data_obj'].items():
-            cart_total_amount += int(item['qty']) * float(item['price'])
+            # Remove non-numeric characters from the price string
+            price_str = item['price'].replace('$', '').replace(',', '')  # Remove '$' and ',' if present
+            cart_total_amount += int(item['qty']) * float(price_str)
 
-    # context = {
-    #     "p": products,
-    # }
     return render(request, "core/payment-completed.html", {"cart_data":request.session['cart_data_obj'], 'totalcartitems':len(request.session['cart_data_obj']),'cart_total_amount':cart_total_amount})
 
 @login_required

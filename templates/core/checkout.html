@@ -85,7 +85,7 @@
                     <div class="border p-40 cart-totals ml-30 mb-50">
                         <div class="d-flex align-items-end justify-content-between mb-30">
                             <h4>Your Order</h4>
-                            <h6 class="text-muted">Subtotal - <span class="text-brand">${{cart_total_amount|floatformat:2}}</span></h6>
+                            <h6 class="text-muted">Subtotal - <span class="text-brand">${{cart_total_amount}}</span></h6>
                         </div>
                         <div class="divider-2 mb-30"></div>
                         <a href=" {% url 'core:cart' %}" class="btn btn-fill-out btn-block mt-30 mb-40">Go back to cart</a><br>
@@ -106,7 +106,7 @@
                                             <h5 class="text-muted">{{ item.price }}</h5>
                                         </td>
                                         <td>
-                                            <h5 class="text-brand">${% widthratio item.price 1 item.qty %}</h5>
+                                            <h5 class="text-brand">{{ item.total_price }}</h5>
                                         </td>
                                     </tr>
                                   
