@@ -56,10 +56,14 @@ cover/
 *.pot
 
 # Django stuff:
-*.log
-local_settings.py
+# Django database and local settings
 db.sqlite3
 db.sqlite3-journal
+local_settings.py
+
+# Django migrations (optional – ignore if you don't want to track migrations)
+**/migrations/
+
 
 # Flask stuff:
 instance/

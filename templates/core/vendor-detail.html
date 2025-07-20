@@ -33,7 +33,7 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="vendor-des mb-15">
-                                    <p class="font-sm text-white">{{vendor.description}}</p>
+                                    <p class="font-sm text-white">{{ vendor.description |safe }}</p>
                                 </div>
                             </div>
                             <div class="col-lg-3">
@@ -155,7 +155,7 @@
                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                     <span class="ml-30">500g</span> {% endcomment %}
                                 </div>
-                                <p class="mt-15 mb-15">{{p.description}}</p>
+                                <p class="mt-15 mb-15">{{p.description | safe}}</p>
                                 <div class="product-price">
                                     <span>${{p.price}} </span>
                                     <span class="old-price">${{p.old_price}}</span>
